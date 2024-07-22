@@ -2,6 +2,10 @@
   "name": "fluid-example-ipcc-ar6-01",
   "version": "0.0.1",
   "description": "An example of a Fluid publication using an IPCC report",
+  "scripts": {
+      "clean": "rm -rf dist/article && mkdir -p dist/article",
+      "build": "yarn clean && spago build && purs-backend-es bundle-app --main Article --to dist/article/app.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/explorable-viz/fluid-example-ipcc-ar6-01.git"
