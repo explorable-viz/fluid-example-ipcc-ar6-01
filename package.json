@@ -11,5 +11,13 @@
   "bugs": {
     "url": "https://github.com/explorable-viz/fluid-example-ipcc-ar6-01/issues"
   },
-  "homepage": "https://github.com/explorable-viz/fluid-example-ipcc-ar6-01#readme"
+  "homepage": "https://github.com/explorable-viz/fluid-example-ipcc-ar6-01#readme",
+  "dependencies": {
+    "purescript": "^0.15.10"
+  },
+  "devDependencies": {
+    "esbuild": "^0.15.1",
+    "purs-backend-es": "^1.1.0",
+    "spago": "^0.20.9"
+  }
 }
