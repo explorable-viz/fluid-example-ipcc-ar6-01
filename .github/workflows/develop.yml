@@ -1,0 +1,17 @@
+name: develop
+run-name: Publish a Fluid publication
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: build
+      - uses: actions/checkout@4
+      - uses: actions/setup-node@4
+        with:
+          node-version: 22
+      - run: |
+          yarn install
+          yarn build
