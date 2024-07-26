@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "An example of a Fluid publication using an IPCC report",
   "scripts": {
-      "clean": "rm -rf dist/article && mkdir -p dist/article",
-      "build": "yarn clean && spago build && purs-backend-es bundle-app --main Article --to dist/article/app.js"
+      "clean": "rm -rf dist && mkdir -p dist && cp index.html dist",
+      "build": "yarn clean && spago build --purs-args '--strict --censor-codes=UserDefinedWarning' && purs-backend-es bundle-app --main Article --to dist/article.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,8 @@
   },
   "devDependencies": {
     "esbuild": "^0.15.1",
+    "purescript-language-server": "0.16.6",
+    "purescript-psa": "0.8.2",
     "purs-backend-es": "^1.1.0",
     "spago": "^0.20.9"
   },

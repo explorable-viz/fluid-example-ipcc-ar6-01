@@ -1,4 +1,4 @@
-module Main where
+module Article where
 
 import Prelude
 
