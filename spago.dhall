@@ -55,6 +55,11 @@ to generate this file without the comments in this block.
   , "web-events"
   ]
 , packages = ./packages.dhall
-, sources = [ "src/**/*.purs", "test/**/*.purs", "fluid/src/**/*.purs", "fluid/test/**/*.purs" ]
+, sources =
+  [ "src/**/*.purs"
+  , "test/**/*.purs"
+  , "fluid-submodule/src/**/*.purs"
+  , "fluid-submodule/test/**/*.purs"
+  ]
 , backend = "purs-backend-es build"
 }
