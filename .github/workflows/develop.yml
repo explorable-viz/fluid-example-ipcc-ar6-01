@@ -11,7 +11,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: clone-submodules
+        run: |
+          git submodule init
+          git submodule update
       - name: build
         run: |
-          yarn install
           yarn build
