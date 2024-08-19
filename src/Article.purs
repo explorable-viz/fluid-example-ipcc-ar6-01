@@ -2,8 +2,9 @@ module Article where
 
 import Prelude hiding (absurd)
 
-import App.Fig (FigSpec, drawFig, loadFig)
+import App.Fig (drawFig, loadFig)
 import App.Util (runAffs_)
+import App.View.Util (FigSpec)
 import Bind ((↦))
 import Data.Tuple (uncurry)
 import Effect (Effect)
@@ -14,10 +15,10 @@ import Util ((×))
 
 figSpec :: FigSpec
 figSpec =
-   { datasets: [ "renewables" ↦ "example/linked-outputs/renewables" ]
+   { datasets: [ "methane" ↦ "data/methane-emissions" ]
    , imports: []
    , file: File "linked-outputs/line-chart"
-   , inputs: [ "renewables" ]
+   , inputs: [ "methane" ]
    }
 
 main :: Effect Unit
