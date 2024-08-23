@@ -7,6 +7,6 @@ let series type = [
       LinePlot { name: type, data: series type }
       | type <- ["Agricultural Waste Burning", "Agriculture", "Energy Sector",
                  "Forest Burning", "Grassland Burning", "Industrial Sector",
-                 " Residential Commercial Other", "Transportation Sector", "Waste"]
+                 "Residential Commercial Other", "Transportation Sector", "Waste"]
    ]
 }

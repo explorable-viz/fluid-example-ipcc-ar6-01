@@ -17,7 +17,7 @@ figSpec :: FigSpec
 figSpec =
    { datasets: [ "methane" ↦ "data/methane-emissions" ]
    , imports: []
-   , file: File "linked-outputs/line-chart"
+   , file: File "line-chart"
    , inputs: [ "methane" ]
    }
 
