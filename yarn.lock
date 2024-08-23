@@ -2,15 +2,15 @@
 # yarn lockfile v1
 
 
-"@codemirror/commands@6.2.2":
-  version "6.2.2"
-  resolved "https://registry.yarnpkg.com/@codemirror/commands/-/commands-6.2.2.tgz#437d9ba275107dbc629f0bfa3b150e0e43f2a218"
-  integrity sha512-s9lPVW7TxXrI/7voZ+HmD/yiAlwAYn9PH5SUVSUhsxXHhv4yl5eZ3KLntSoTynfdgVYM0oIpccQEWRBQgmNZyw==
+"@codemirror/commands@6.6.0":
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/@codemirror/commands/-/commands-6.6.0.tgz#d308f143fe1b8896ca25fdb855f66acdaf019dd4"
+  integrity sha512-qnY+b7j1UNcTS31Eenuc/5YJB6gQOzkUoNmJQc0rznwqSRpeaWWpjkWy2C/MPTcePpsKJEM26hXrOXl1+nceXg==
   dependencies:
     "@codemirror/language" "^6.0.0"
-    "@codemirror/state" "^6.2.0"
-    "@codemirror/view" "^6.0.0"
-    "@lezer/common" "^1.0.0"
+    "@codemirror/state" "^6.4.0"
+    "@codemirror/view" "^6.27.0"
+    "@lezer/common" "^1.1.0"
 
 "@codemirror/language@^6.0.0":
   version "6.10.2"
@@ -24,29 +24,15 @@
     "@lezer/lr" "^1.0.0"
     style-mod "^4.0.0"
 
-"@codemirror/state@6.2.0":
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/@codemirror/state/-/state-6.2.0.tgz#a0fb08403ced8c2a68d1d0acee926bd20be922f2"
-  integrity sha512-69QXtcrsc3RYtOtd+GsvczJ319udtBf1PTrr2KbLWM/e2CXUPnh0Nz9AUo8WfhSQ7GeL8dPVNUmhQVgpmuaNGA==
-
-"@codemirror/state@^6.0.0", "@codemirror/state@^6.1.4", "@codemirror/state@^6.2.0", "@codemirror/state@^6.4.0":
+"@codemirror/state@6.4.1", "@codemirror/state@^6.0.0", "@codemirror/state@^6.4.0":
   version "6.4.1"
   resolved "https://registry.yarnpkg.com/@codemirror/state/-/state-6.4.1.tgz#da57143695c056d9a3c38705ed34136e2b68171b"
   integrity sha512-QkEyUiLhsJoZkbumGZlswmAhA7CBU02Wrz7zvH4SrcifbsqwlXShVXg65f3v/ts57W3dqyamEriMhij1Z3Zz4A==
 
-"@codemirror/view@6.9.3":
-  version "6.9.3"
-  resolved "https://registry.yarnpkg.com/@codemirror/view/-/view-6.9.3.tgz#4475dc0ff5d9a55f8144ad7484e7e17416861cce"
-  integrity sha512-BJ5mvEIhFM+SrNwc5X8pLIvMM9ffjkviVbxpg84Xk2OE8ZyKaEbId8kX+nAYEEso7+qnbwsXe1bkAHsasebMow==
-  dependencies:
-    "@codemirror/state" "^6.1.4"
-    style-mod "^4.0.0"
-    w3c-keyname "^2.2.4"
-
-"@codemirror/view@^6.0.0", "@codemirror/view@^6.23.0":
-  version "6.29.1"
-  resolved "https://registry.yarnpkg.com/@codemirror/view/-/view-6.29.1.tgz#9c6c6f8a15e12df1b7e9d136dcbf4ff90b81ef71"
-  integrity sha512-7r+DlO/QFwPqKp73uq5mmrS4TuLPUVotbNOKYzN3OLP5ScrOVXcm4g13/48b6ZXGhdmzMinzFYqH0vo+qihIkQ==
+"@codemirror/view@6.32.0", "@codemirror/view@^6.23.0", "@codemirror/view@^6.27.0":
+  version "6.32.0"
+  resolved "https://registry.yarnpkg.com/@codemirror/view/-/view-6.32.0.tgz#94be8aa18b60044471200ee80b0339513036680e"
+  integrity sha512-AgVNvED2QTsZp5e3syoHLsrWtwJFYWdx1Vr/m3f4h1ATQz0ax60CfXF3Htdmk69k2MlYZw8gXesnQdHtzyVmAw==
   dependencies:
     "@codemirror/state" "^6.4.0"
     style-mod "^4.1.0"
@@ -73,9 +59,9 @@
   integrity sha512-yemX0ZD2xS/73llMZIK6KplkjIjf2EvAHcinDi/TfJ9hS25G0388+ClHt6/3but0oOxinTcQHJLDXh6w1crzFQ==
 
 "@lezer/highlight@^1.0.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@lezer/highlight/-/highlight-1.2.0.tgz#e5898c3644208b4b589084089dceeea2966f7780"
-  integrity sha512-WrS5Mw51sGrpqjlh3d4/fOwpEV2Hd3YOkp9DBt4k8XZQcoTHZFB7sx030A6OcahF4J1nDQAa3jXlTVVYH50IFA==
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@lezer/highlight/-/highlight-1.2.1.tgz#596fa8f9aeb58a608be0a563e960c373cbf23f8b"
+  integrity sha512-Z5duk4RN/3zuVO7Jq0pGLJ3qynpxUVsh7IbUbGj88+uV2ApSAn6kWg2au3iJb+0Zi7kKtqffIESgNcRXWZWmSA==
   dependencies:
     "@lezer/common" "^1.0.0"
 
