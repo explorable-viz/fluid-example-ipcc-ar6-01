@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "description": "An example of a Fluid publication using an IPCC report",
   "scripts": {
-      "clean": "rm -rf dist && mkdir -p dist && cp index.html dist",
-      "build": "yarn clean && yarn install && spago build --purs-args '--strict --censor-codes=UserDefinedWarning' && purs-backend-es bundle-app --main Article --to dist/article.js"
+      "clean": "rm -rf dist && mkdir -p dist && cp -r fluid dist && cp -r fluid-submodule/fluid/lib dist/fluid && cp index.html dist",
+      "build": "yarn clean && yarn install && spago build --purs-args '--strict --censor-codes=UserDefinedWarning' && purs-backend-es bundle-app --main Article --to dist/article.js",
+      "serve": "npx http-serve dist -a 127.0.0.1 -c-1"
   },
   "repository": {
     "type": "git",
