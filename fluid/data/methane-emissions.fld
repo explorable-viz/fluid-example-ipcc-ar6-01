@@ -2,7 +2,7 @@
 -- Model: REMIND; Scenario: MAGPIE-SSP5-8.5
 [
    -- 2015
-   { year: 2015, type: "Total", emissions: 64.82295407 },
+   { year: 2015, type: "total", emissions: 64.82295407 },
    { year: 2015, type: "Agricultural Waste Burning", emissions: 0.41125300 },
    { year: 2015, type: "Agriculture", emissions: 18.17094166 },
    { year: 2015, type: "Energy Sector", emissions: 29.76188165 },
@@ -14,7 +14,7 @@
    { year: 2015, type: "Waste", emissions: 8.98732911 },
 
    -- 2020
-   { year: 2020, type: "Total", emissions: 78.43285535 },
+   { year: 2020, type: "total", emissions: 78.43285535 },
    { year: 2020, type: "Agricultural Waste Burning", emissions: 0.54358088 },
    { year: 2020, type: "Agriculture", emissions: 22.13282073 },
    { year: 2020, type: "Energy Sector", emissions: 38.81883821 },
