@@ -41176,7 +41176,7 @@
     const Bind1 = Monad0.Bind1();
     return (dictMonadError) => Bind1.bind(dictMonadAff.liftAff(request(driver)({
       ...defaultRequest,
-      url: "/" + v + "/" + v1 + ".fld",
+      url: v + "/" + v1 + ".fld",
       method: $Either("Left", GET),
       responseFormat: $ResponseFormat("String", identity28)
     })))((result) => {
