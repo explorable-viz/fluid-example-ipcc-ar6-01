@@ -36,6 +36,7 @@ to generate this file without the comments in this block.
   , "lists"
   , "maybe"
   , "newtype"
+  , "node-process"
   , "nonempty"
   , "numbers"
   , "ordered-collections"
