@@ -252,15 +252,15 @@
   function axis(orient, scale) {
     var tickArguments = [], tickValues = null, tickFormat2 = null, tickSizeInner = 6, tickSizeOuter = 6, tickPadding = 3, offset = typeof window !== "undefined" && window.devicePixelRatio > 1 ? 0 : 0.5, k = orient === top || orient === left ? -1 : 1, x2 = orient === left || orient === right ? "x" : "y", transform2 = orient === top || orient === bottom ? translateX : translateY;
     function axis2(context) {
-      var values3 = tickValues == null ? scale.ticks ? scale.ticks.apply(scale, tickArguments) : scale.domain() : tickValues, format2 = tickFormat2 == null ? scale.tickFormat ? scale.tickFormat.apply(scale, tickArguments) : identity_default : tickFormat2, spacing = Math.max(tickSizeInner, 0) + tickPadding, range4 = scale.range(), range0 = +range4[0] + offset, range1 = +range4[range4.length - 1] + offset, position2 = (scale.bandwidth ? center : number2)(scale.copy(), offset), selection2 = context.selection ? context.selection() : context, path2 = selection2.selectAll(".domain").data([null]), tick = selection2.selectAll(".tick").data(values3, scale).order(), tickExit = tick.exit(), tickEnter = tick.enter().append("g").attr("class", "tick"), line = tick.select("line"), text2 = tick.select("text");
+      var values3 = tickValues == null ? scale.ticks ? scale.ticks.apply(scale, tickArguments) : scale.domain() : tickValues, format2 = tickFormat2 == null ? scale.tickFormat ? scale.tickFormat.apply(scale, tickArguments) : identity_default : tickFormat2, spacing = Math.max(tickSizeInner, 0) + tickPadding, range4 = scale.range(), range0 = +range4[0] + offset, range1 = +range4[range4.length - 1] + offset, position2 = (scale.bandwidth ? center : number2)(scale.copy(), offset), selection2 = context.selection ? context.selection() : context, path2 = selection2.selectAll(".domain").data([null]), tick = selection2.selectAll(".tick").data(values3, scale).order(), tickExit = tick.exit(), tickEnter = tick.enter().append("g").attr("class", "tick"), line2 = tick.select("line"), text2 = tick.select("text");
       path2 = path2.merge(path2.enter().insert("path", ".tick").attr("class", "domain").attr("stroke", "currentColor"));
       tick = tick.merge(tickEnter);
-      line = line.merge(tickEnter.append("line").attr("stroke", "currentColor").attr(x2 + "2", k * tickSizeInner));
+      line2 = line2.merge(tickEnter.append("line").attr("stroke", "currentColor").attr(x2 + "2", k * tickSizeInner));
       text2 = text2.merge(tickEnter.append("text").attr("fill", "currentColor").attr(x2, k * spacing).attr("dy", orient === top ? "0em" : orient === bottom ? "0.71em" : "0.32em"));
       if (context !== selection2) {
         path2 = path2.transition(context);
         tick = tick.transition(context);
-        line = line.transition(context);
+        line2 = line2.transition(context);
         text2 = text2.transition(context);
         tickExit = tickExit.transition(context).attr("opacity", epsilon).attr("transform", function(d) {
           return isFinite(d = position2(d)) ? transform2(d + offset) : this.getAttribute("transform");
@@ -275,7 +275,7 @@
       tick.attr("opacity", 1).attr("transform", function(d) {
         return transform2(position2(d) + offset);
       });
-      line.attr(x2 + "2", k * tickSizeInner);
+      line2.attr(x2 + "2", k * tickSizeInner);
       text2.attr(x2, k * spacing).text(format2);
       selection2.filter(entering).attr("fill", "none").attr("font-size", 10).attr("font-family", "sans-serif").attr("text-anchor", orient === right ? "start" : orient === left ? "end" : "middle");
       selection2.each(function() {
@@ -1868,7 +1868,7 @@
     function pop(s) {
       return s.length ? s.pop() + " " : "";
     }
-    function translate(xa, ya, xb, yb, s, q) {
+    function translate2(xa, ya, xb, yb, s, q) {
       if (xa !== xb || ya !== yb) {
         var i = s.push("translate(", null, pxComma, null, pxParen);
         q.push({ i: i - 4, x: number_default(xa, xb) }, { i: i - 2, x: number_default(ya, yb) });
@@ -1905,7 +1905,7 @@
     return function(a, b) {
       var s = [], q = [];
       a = parse2(a), b = parse2(b);
-      translate(a.translateX, a.translateY, b.translateX, b.translateY, s, q);
+      translate2(a.translateX, a.translateY, b.translateX, b.translateY, s, q);
       rotate(a.rotate, b.rotate, s, q);
       skewX(a.skewX, b.skewX, s, q);
       scale(a.scaleX, a.scaleY, b.scaleX, b.scaleY, s, q);
@@ -2944,12 +2944,12 @@
   // node_modules/d3-format/src/formatGroup.js
   function formatGroup_default(grouping, thousands) {
     return function(value, width) {
-      var i = value.length, t2 = [], j = 0, g = grouping[0], length4 = 0;
+      var i = value.length, t2 = [], j = 0, g = grouping[0], length5 = 0;
       while (i > 0 && g > 0) {
-        if (length4 + g + 1 > width)
-          g = Math.max(1, width - length4);
+        if (length5 + g + 1 > width)
+          g = Math.max(1, width - length5);
         t2.push(value.substring(i -= g, i + g));
-        if ((length4 += g + 1) > width)
+        if ((length5 += g + 1) > width)
           break;
         g = grouping[j = (j + 1) % grouping.length];
       }
@@ -3112,7 +3112,7 @@
         }
         if (comma2 && !zero3)
           value = group3(value, Infinity);
-        var length4 = valuePrefix.length + value.length + valueSuffix.length, padding = length4 < width ? new Array(width - length4 + 1).join(fill) : "";
+        var length5 = valuePrefix.length + value.length + valueSuffix.length, padding = length5 < width ? new Array(width - length5 + 1).join(fill) : "";
         if (comma2 && zero3)
           value = group3(padding + value, padding.length ? width - valueSuffix.length : Infinity), padding = "";
         switch (align) {
@@ -3123,7 +3123,7 @@
             value = valuePrefix + padding + value + valueSuffix;
             break;
           case "^":
-            value = padding.slice(0, length4 = padding.length >> 1) + valuePrefix + value + valueSuffix + padding.slice(length4);
+            value = padding.slice(0, length5 = padding.length >> 1) + valuePrefix + value + valueSuffix + padding.slice(length5);
             break;
           default:
             value = padding + valuePrefix + value + valueSuffix;
@@ -3567,10 +3567,10 @@
 
   // node_modules/d3-shape/src/line.js
   function line_default(x2, y2) {
-    var defined2 = constant_default4(true), context = null, curve = linear_default, output = null, path2 = withPath(line);
+    var defined2 = constant_default4(true), context = null, curve = linear_default, output = null, path2 = withPath(line2);
     x2 = typeof x2 === "function" ? x2 : x2 === void 0 ? x : constant_default4(x2);
     y2 = typeof y2 === "function" ? y2 : y2 === void 0 ? y : constant_default4(y2);
-    function line(data) {
+    function line2(data) {
       var i, n = (data = array_default(data)).length, d, defined0 = false, buffer;
       if (context == null)
         output = curve(buffer = path2());
@@ -3587,22 +3587,22 @@
       if (buffer)
         return output = null, buffer + "" || null;
     }
-    line.x = function(_) {
-      return arguments.length ? (x2 = typeof _ === "function" ? _ : constant_default4(+_), line) : x2;
+    line2.x = function(_) {
+      return arguments.length ? (x2 = typeof _ === "function" ? _ : constant_default4(+_), line2) : x2;
     };
-    line.y = function(_) {
-      return arguments.length ? (y2 = typeof _ === "function" ? _ : constant_default4(+_), line) : y2;
+    line2.y = function(_) {
+      return arguments.length ? (y2 = typeof _ === "function" ? _ : constant_default4(+_), line2) : y2;
     };
-    line.defined = function(_) {
-      return arguments.length ? (defined2 = typeof _ === "function" ? _ : constant_default4(!!_), line) : defined2;
+    line2.defined = function(_) {
+      return arguments.length ? (defined2 = typeof _ === "function" ? _ : constant_default4(!!_), line2) : defined2;
     };
-    line.curve = function(_) {
-      return arguments.length ? (curve = _, context != null && (output = curve(context)), line) : curve;
+    line2.curve = function(_) {
+      return arguments.length ? (curve = _, context != null && (output = curve(context)), line2) : curve;
     };
-    line.context = function(_) {
-      return arguments.length ? (_ == null ? context = output = null : output = curve(context = _), line) : context;
+    line2.context = function(_) {
+      return arguments.length ? (_ == null ? context = output = null : output = curve(context = _), line2) : context;
     };
-    return line;
+    return line2;
   }
 
   // node_modules/d3-zoom/src/transform.js
@@ -3741,10 +3741,10 @@
     }
   };
   var TextLeaf = class extends Text {
-    constructor(text2, length4 = textLength(text2)) {
+    constructor(text2, length5 = textLength(text2)) {
       super();
       this.text = text2;
-      this.length = length4;
+      this.length = length5;
     }
     get lines() {
       return this.text.length;
@@ -3752,13 +3752,13 @@
     get children() {
       return null;
     }
-    lineInner(target, isLine, line, offset) {
+    lineInner(target, isLine, line2, offset) {
       for (let i = 0; ; i++) {
         let string4 = this.text[i], end = offset + string4.length;
-        if ((isLine ? line : end) >= target)
-          return new Line(offset, end, line, string4);
+        if ((isLine ? line2 : end) >= target)
+          return new Line(offset, end, line2, string4);
         offset = end + 1;
-        line++;
+        line2++;
       }
     }
     decompose(from, to, target, open) {
@@ -3790,27 +3790,27 @@
       [from, to] = clip(this, from, to);
       let result = "";
       for (let pos = 0, i = 0; pos <= to && i < this.text.length; i++) {
-        let line = this.text[i], end = pos + line.length;
+        let line2 = this.text[i], end = pos + line2.length;
         if (pos > from && i)
           result += lineSep;
         if (from < end && to > pos)
-          result += line.slice(Math.max(0, from - pos), to - pos);
+          result += line2.slice(Math.max(0, from - pos), to - pos);
         pos = end + 1;
       }
       return result;
     }
     flatten(target) {
-      for (let line of this.text)
-        target.push(line);
+      for (let line2 of this.text)
+        target.push(line2);
     }
     scanIdentical() {
       return 0;
     }
     static split(text2, target) {
       let part = [], len = -1;
-      for (let line of text2) {
-        part.push(line);
-        len += line.length + 1;
+      for (let line2 of text2) {
+        part.push(line2);
+        len += line2.length + 1;
         if (part.length == 32) {
           target.push(new TextLeaf(part, len));
           part = [];
@@ -3823,21 +3823,21 @@
     }
   };
   var TextNode = class extends Text {
-    constructor(children2, length4) {
+    constructor(children2, length5) {
       super();
       this.children = children2;
-      this.length = length4;
+      this.length = length5;
       this.lines = 0;
       for (let child of children2)
         this.lines += child.lines;
     }
-    lineInner(target, isLine, line, offset) {
+    lineInner(target, isLine, line2, offset) {
       for (let i = 0; ; i++) {
-        let child = this.children[i], end = offset + child.length, endLine = line + child.lines - 1;
+        let child = this.children[i], end = offset + child.length, endLine = line2 + child.lines - 1;
         if ((isLine ? endLine : end) >= target)
-          return child.lineInner(target, isLine, line, offset);
+          return child.lineInner(target, isLine, line2, offset);
         offset = end + 1;
-        line = endLine + 1;
+        line2 = endLine + 1;
       }
     }
     decompose(from, to, target, open) {
@@ -3892,18 +3892,18 @@
     scanIdentical(other, dir) {
       if (!(other instanceof TextNode))
         return 0;
-      let length4 = 0;
+      let length5 = 0;
       let [iA, iB, eA, eB] = dir > 0 ? [0, 0, this.children.length, other.children.length] : [this.children.length - 1, other.children.length - 1, -1, -1];
       for (; ; iA += dir, iB += dir) {
         if (iA == eA || iB == eB)
-          return length4;
+          return length5;
         let chA = this.children[iA], chB = other.children[iB];
         if (chA != chB)
-          return length4 + chA.scanIdentical(chB, dir);
-        length4 += chA.length + 1;
+          return length5 + chA.scanIdentical(chB, dir);
+        length5 += chA.length + 1;
       }
     }
-    static from(children2, length4 = children2.reduce((l, ch) => l + ch.length + 1, -1)) {
+    static from(children2, length5 = children2.reduce((l, ch) => l + ch.length + 1, -1)) {
       let lines = 0;
       for (let ch of children2)
         lines += ch.lines;
@@ -3911,7 +3911,7 @@
         let flat = [];
         for (let ch of children2)
           ch.flatten(flat);
-        return new TextLeaf(flat, length4);
+        return new TextLeaf(flat, length5);
       }
       let chunk = Math.max(32, lines >> 5), maxChunk = chunk << 1, minChunk = chunk >> 1;
       let chunked = [], currentLines = 0, currentLen = -1, currentChunk = [];
@@ -3945,29 +3945,29 @@
       for (let child of children2)
         add(child);
       flush();
-      return chunked.length == 1 ? chunked[0] : new TextNode(chunked, length4);
+      return chunked.length == 1 ? chunked[0] : new TextNode(chunked, length5);
     }
   };
   Text.empty = /* @__PURE__ */ new TextLeaf([""], 0);
   function textLength(text2) {
-    let length4 = -1;
-    for (let line of text2)
-      length4 += line.length + 1;
-    return length4;
+    let length5 = -1;
+    for (let line2 of text2)
+      length5 += line2.length + 1;
+    return length5;
   }
   function appendText(text2, target, from = 0, to = 1e9) {
     for (let pos = 0, i = 0, first = true; i < text2.length && pos <= to; i++) {
-      let line = text2[i], end = pos + line.length;
+      let line2 = text2[i], end = pos + line2.length;
       if (end >= from) {
         if (end > to)
-          line = line.slice(0, to - pos);
+          line2 = line2.slice(0, to - pos);
         if (pos < from)
-          line = line.slice(from - pos);
+          line2 = line2.slice(from - pos);
         if (first) {
-          target[target.length - 1] += line;
+          target[target.length - 1] += line2;
           first = false;
         } else
-          target.push(line);
+          target.push(line2);
       }
       pos = end + 1;
     }
@@ -4402,14 +4402,14 @@
       }
       return parts;
     }
-    static of(changes, length4, lineSep) {
+    static of(changes, length5, lineSep) {
       let sections = [], inserted = [], pos = 0;
       let total = null;
       function flush(force2 = false) {
         if (!force2 && !sections.length)
           return;
-        if (pos < length4)
-          addSection(sections, length4 - pos, -1);
+        if (pos < length5)
+          addSection(sections, length5 - pos, -1);
         let set3 = new ChangeSet(sections, inserted);
         total = total ? total.compose(set3.map(total)) : set3;
         sections = [];
@@ -4421,14 +4421,14 @@
           for (let sub of spec)
             process(sub);
         } else if (spec instanceof ChangeSet) {
-          if (spec.length != length4)
-            throw new RangeError(`Mismatched change set length (got ${spec.length}, expected ${length4})`);
+          if (spec.length != length5)
+            throw new RangeError(`Mismatched change set length (got ${spec.length}, expected ${length5})`);
           flush();
           total = total ? total.compose(spec.map(total)) : spec;
         } else {
           let { from, to = from, insert: insert4 } = spec;
-          if (from > to || from < 0 || to > length4)
-            throw new RangeError(`Invalid change range ${from} to ${to} (in doc of length ${length4})`);
+          if (from > to || from < 0 || to > length5)
+            throw new RangeError(`Invalid change range ${from} to ${to} (in doc of length ${length5})`);
           let insText = !insert4 ? Text.empty : typeof insert4 == "string" ? Text.of(insert4.split(lineSep || DefaultSplit)) : insert4;
           let insLen = insText.length;
           if (from == to && insLen == 0)
@@ -4446,8 +4446,8 @@
       flush(!total);
       return total;
     }
-    static empty(length4) {
-      return new ChangeSet(length4 ? [length4, -1] : [], []);
+    static empty(length5) {
+      return new ChangeSet(length5 ? [length5, -1] : [], []);
     }
     static fromJSON(json) {
       if (!Array.isArray(json))
@@ -5615,7 +5615,7 @@
       return makeCategorizer(this.languageDataAt("wordChars", at).join(""));
     }
     wordAt(pos) {
-      let { text: text2, from, length: length4 } = this.doc.lineAt(pos);
+      let { text: text2, from, length: length5 } = this.doc.lineAt(pos);
       let cat = this.charCategorizer(pos);
       let start2 = pos - from, end = pos - from;
       while (start2 > 0) {
@@ -5624,7 +5624,7 @@
           break;
         start2 = prev;
       }
-      while (end < length4) {
+      while (end < length5) {
         let next = findClusterBreak(text2, end);
         if (cat(text2.slice(end, next)) != CharCategory.Word)
           break;
@@ -5838,7 +5838,7 @@
       let sharedChunks = findSharedChunks(a, b, textDiff);
       let sideA = new SpanCursor(a, sharedChunks, minPointSize);
       let sideB = new SpanCursor(b, sharedChunks, minPointSize);
-      textDiff.iterGaps((fromA, fromB, length4) => compare(sideA, fromA, sideB, fromB, length4, comparator));
+      textDiff.iterGaps((fromA, fromB, length5) => compare(sideA, fromA, sideB, fromB, length5, comparator));
       if (textDiff.empty && textDiff.length == 0)
         compare(sideA, 0, sideB, 0, 0, comparator);
     }
@@ -6260,10 +6260,10 @@
       return open;
     }
   };
-  function compare(a, startA, b, startB, length4, comparator) {
+  function compare(a, startA, b, startB, length5, comparator) {
     a.goto(startA);
     b.goto(startB);
-    let endB = startB + length4;
+    let endB = startB + length5;
     let pos = startB, dPos = startB - startA;
     for (; ; ) {
       let diff = a.to + dPos - b.to || a.endSide - b.endSide;
@@ -7332,11 +7332,11 @@
     }
   };
   var MarkView = class extends ContentView {
-    constructor(mark, children2 = [], length4 = 0) {
+    constructor(mark, children2 = [], length5 = 0) {
       super();
       this.mark = mark;
       this.children = children2;
-      this.length = length4;
+      this.length = length5;
       for (let ch of children2)
         ch.setParent(this);
     }
@@ -7383,13 +7383,13 @@
         off = end;
         i++;
       }
-      let length4 = this.length - from;
+      let length5 = this.length - from;
       this.length = from;
       if (detachFrom > -1) {
         this.children.length = detachFrom;
         this.markDirty();
       }
-      return new MarkView(this.mark, result, length4);
+      return new MarkView(this.mark, result, length5);
     }
     domAtPos(pos) {
       return inlineDOMAtPos(this, pos);
@@ -7399,16 +7399,16 @@
     }
   };
   function textCoords(text2, pos, side) {
-    let length4 = text2.nodeValue.length;
-    if (pos > length4)
-      pos = length4;
+    let length5 = text2.nodeValue.length;
+    if (pos > length5)
+      pos = length5;
     let from = pos, to = pos, flatten2 = 0;
-    if (pos == 0 && side < 0 || pos == length4 && side >= 0) {
+    if (pos == 0 && side < 0 || pos == length5 && side >= 0) {
       if (!(browser.chrome || browser.gecko)) {
         if (pos) {
           from--;
           flatten2 = 1;
-        } else if (to < length4) {
+        } else if (to < length5) {
           to++;
           flatten2 = -1;
         }
@@ -7416,7 +7416,7 @@
     } else {
       if (side < 0)
         from--;
-      else if (to < length4)
+      else if (to < length5)
         to++;
     }
     let rects = textRange(text2, from, to).getClientRects();
@@ -7428,13 +7428,13 @@
     return flatten2 ? flattenRect(rect, flatten2 < 0) : rect || null;
   }
   var WidgetView = class extends ContentView {
-    static create(widget, length4, side) {
-      return new WidgetView(widget, length4, side);
+    static create(widget, length5, side) {
+      return new WidgetView(widget, length5, side);
     }
-    constructor(widget, length4, side) {
+    constructor(widget, length5, side) {
       super();
       this.widget = widget;
-      this.length = length4;
+      this.length = length5;
       this.side = side;
       this.prevWidget = null;
     }
@@ -8011,10 +8011,10 @@
     }
   };
   var BlockWidgetView = class extends ContentView {
-    constructor(widget, length4, deco) {
+    constructor(widget, length5, deco) {
       super();
       this.widget = widget;
-      this.length = length4;
+      this.length = length5;
       this.deco = deco;
       this.breakAfter = 0;
       this.prevWidget = null;
@@ -8177,8 +8177,8 @@
       if (!this.posCovered() && !(openEnd && this.content.length && this.content[this.content.length - 1] instanceof BlockWidgetView))
         this.getLine();
     }
-    buildText(length4, active, openStart) {
-      while (length4 > 0) {
+    buildText(length5, active, openStart) {
+      while (length5 > 0) {
         if (this.textOff == this.text.length) {
           let { value, lineBreak, done } = this.cursor.next(this.skip);
           this.skip = 0;
@@ -8194,19 +8194,19 @@
             this.flushBuffer();
             this.curLine = null;
             this.atCursorPos = true;
-            length4--;
+            length5--;
             continue;
           } else {
             this.text = value;
             this.textOff = 0;
           }
         }
-        let take4 = Math.min(this.text.length - this.textOff, length4, 512);
+        let take4 = Math.min(this.text.length - this.textOff, length5, 512);
         this.flushBuffer(active.slice(active.length - openStart));
         this.getLine().append(wrapMarks(new TextView(this.text.slice(this.textOff, this.textOff + take4)), active), openStart);
         this.atCursorPos = true;
         this.textOff += take4;
-        length4 -= take4;
+        length5 -= take4;
         openStart = 0;
       }
     }
@@ -8233,15 +8233,15 @@
           let view2 = WidgetView.create(deco.widget || NullWidget.inline, len, len ? 0 : deco.startSide);
           let cursorBefore = this.atCursorPos && !view2.isEditable && openStart <= active.length && (from < to || deco.startSide > 0);
           let cursorAfter = !view2.isEditable && (from < to || openStart > active.length || deco.startSide <= 0);
-          let line = this.getLine();
+          let line2 = this.getLine();
           if (this.pendingBuffer == 2 && !cursorBefore && !view2.isEditable)
             this.pendingBuffer = 0;
           this.flushBuffer(active);
           if (cursorBefore) {
-            line.append(wrapMarks(new WidgetBufferView(1), active), openStart);
+            line2.append(wrapMarks(new WidgetBufferView(1), active), openStart);
             openStart = active.length + Math.max(0, openStart - active.length);
           }
-          line.append(wrapMarks(view2, active), openStart);
+          line2.append(wrapMarks(view2, active), openStart);
           this.atCursorPos = cursorAfter;
           this.pendingBuffer = !cursorAfter ? 0 : from < to || openStart > active.length ? 1 : 2;
           if (this.pendingBuffer)
@@ -8365,12 +8365,12 @@
     return true;
   }
   var types = [];
-  function computeCharTypes(line, rFrom, rTo, isolates, outerType) {
+  function computeCharTypes(line2, rFrom, rTo, isolates, outerType) {
     for (let iI = 0; iI <= isolates.length; iI++) {
       let from = iI ? isolates[iI - 1].to : rFrom, to = iI < isolates.length ? isolates[iI].from : rTo;
       let prevType = iI ? 256 : outerType;
       for (let i = from, prev = prevType, prevStrong = prevType; i < to; i++) {
-        let type2 = charType(line.charCodeAt(i));
+        let type2 = charType(line2.charCodeAt(i));
         if (type2 == 512)
           type2 = prev;
         else if (type2 == 8 && prevStrong == 4)
@@ -8404,12 +8404,12 @@
       }
     }
   }
-  function processBracketPairs(line, rFrom, rTo, isolates, outerType) {
+  function processBracketPairs(line2, rFrom, rTo, isolates, outerType) {
     let oppositeType = outerType == 1 ? 2 : 1;
     for (let iI = 0, sI = 0, context = 0; iI <= isolates.length; iI++) {
       let from = iI ? isolates[iI - 1].to : rFrom, to = iI < isolates.length ? isolates[iI].from : rTo;
       for (let i = from, ch, br, type2; i < to; i++) {
-        if (br = Brackets[ch = line.charCodeAt(i)]) {
+        if (br = Brackets[ch = line2.charCodeAt(i)]) {
           if (br < 0) {
             for (let sJ = sI - 3; sJ >= 0; sJ -= 3) {
               if (BracketStack[sJ + 1] == -br) {
@@ -8484,7 +8484,7 @@
       }
     }
   }
-  function emitSpans(line, from, to, level, baseLevel, isolates, order) {
+  function emitSpans(line2, from, to, level, baseLevel, isolates, order) {
     let ourType = level % 2 ? 2 : 1;
     if (level % 2 == baseLevel % 2) {
       for (let iCh = from, iI = 0; iCh < to; ) {
@@ -8523,7 +8523,7 @@
                 if (iso.from > iCh)
                   order.push(new BidiSpan(iCh, iso.from, localLevel));
                 let dirSwap = iso.direction == LTR != !(localLevel % 2);
-                computeSectionOrder(line, dirSwap ? level + 1 : level, baseLevel, iso.inner, iso.from, iso.to, order);
+                computeSectionOrder(line2, dirSwap ? level + 1 : level, baseLevel, iso.inner, iso.from, iso.to, order);
                 iCh = iso.to;
               }
               iScan = iso.to;
@@ -8534,7 +8534,7 @@
             }
           }
         if (recurse)
-          emitSpans(line, iCh, iScan, level + 1, baseLevel, recurse, order);
+          emitSpans(line2, iCh, iScan, level + 1, baseLevel, recurse, order);
         else if (iCh < iScan)
           order.push(new BidiSpan(iCh, iScan, localLevel));
         iCh = iScan;
@@ -8575,7 +8575,7 @@
                 if (iso.to < iCh)
                   order.push(new BidiSpan(iso.to, iCh, localLevel));
                 let dirSwap = iso.direction == LTR != !(localLevel % 2);
-                computeSectionOrder(line, dirSwap ? level + 1 : level, baseLevel, iso.inner, iso.from, iso.to, order);
+                computeSectionOrder(line2, dirSwap ? level + 1 : level, baseLevel, iso.inner, iso.from, iso.to, order);
                 iCh = iso.from;
               }
               iScan = iso.from;
@@ -8586,39 +8586,39 @@
             }
           }
         if (recurse)
-          emitSpans(line, iScan, iCh, level + 1, baseLevel, recurse, order);
+          emitSpans(line2, iScan, iCh, level + 1, baseLevel, recurse, order);
         else if (iScan < iCh)
           order.push(new BidiSpan(iScan, iCh, localLevel));
         iCh = iScan;
       }
     }
   }
-  function computeSectionOrder(line, level, baseLevel, isolates, from, to, order) {
+  function computeSectionOrder(line2, level, baseLevel, isolates, from, to, order) {
     let outerType = level % 2 ? 2 : 1;
-    computeCharTypes(line, from, to, isolates, outerType);
-    processBracketPairs(line, from, to, isolates, outerType);
+    computeCharTypes(line2, from, to, isolates, outerType);
+    processBracketPairs(line2, from, to, isolates, outerType);
     processNeutrals(from, to, isolates, outerType);
-    emitSpans(line, from, to, level, baseLevel, isolates, order);
+    emitSpans(line2, from, to, level, baseLevel, isolates, order);
   }
-  function computeOrder(line, direction, isolates) {
-    if (!line)
+  function computeOrder(line2, direction, isolates) {
+    if (!line2)
       return [new BidiSpan(0, 0, direction == RTL ? 1 : 0)];
-    if (direction == LTR && !isolates.length && !BidiRE.test(line))
-      return trivialOrder(line.length);
+    if (direction == LTR && !isolates.length && !BidiRE.test(line2))
+      return trivialOrder(line2.length);
     if (isolates.length)
-      while (line.length > types.length)
+      while (line2.length > types.length)
         types[types.length] = 256;
     let order = [], level = direction == LTR ? 0 : 1;
-    computeSectionOrder(line, level, level, isolates, 0, line.length, order);
+    computeSectionOrder(line2, level, level, isolates, 0, line2.length, order);
     return order;
   }
-  function trivialOrder(length4) {
-    return [new BidiSpan(0, length4, 0)];
+  function trivialOrder(length5) {
+    return [new BidiSpan(0, length5, 0)];
   }
   var movedOver = "";
-  function moveVisually(line, order, dir, start2, forward) {
+  function moveVisually(line2, order, dir, start2, forward) {
     var _a2;
-    let startIndex = start2.head - line.from;
+    let startIndex = start2.head - line2.from;
     let spanI = BidiSpan.find(order, startIndex, (_a2 = start2.bidiLevel) !== null && _a2 !== void 0 ? _a2 : -1, start2.assoc);
     let span2 = order[spanI], spanEnd = span2.side(forward, dir);
     if (startIndex == spanEnd) {
@@ -8629,14 +8629,14 @@
       startIndex = span2.side(!forward, dir);
       spanEnd = span2.side(forward, dir);
     }
-    let nextIndex = findClusterBreak(line.text, startIndex, span2.forward(forward, dir));
+    let nextIndex = findClusterBreak(line2.text, startIndex, span2.forward(forward, dir));
     if (nextIndex < span2.from || nextIndex > span2.to)
       nextIndex = spanEnd;
-    movedOver = line.text.slice(Math.min(startIndex, nextIndex), Math.max(startIndex, nextIndex));
+    movedOver = line2.text.slice(Math.min(startIndex, nextIndex), Math.max(startIndex, nextIndex));
     let nextSpan = spanI == (forward ? order.length - 1 : 0) ? null : order[spanI + (forward ? 1 : -1)];
     if (nextSpan && nextIndex == spanEnd && nextSpan.level + (forward ? 0 : 1) < span2.level)
-      return EditorSelection.cursor(nextSpan.side(!forward, dir) + line.from, nextSpan.forward(forward, dir) ? 1 : -1, nextSpan.level);
-    return EditorSelection.cursor(nextIndex + line.from, span2.forward(forward, dir) ? -1 : 1, span2.level);
+      return EditorSelection.cursor(nextSpan.side(!forward, dir) + line2.from, nextSpan.forward(forward, dir) ? 1 : -1, nextSpan.level);
+    return EditorSelection.cursor(nextIndex + line2.from, span2.forward(forward, dir) ? -1 : 1, span2.level);
   }
   function autoDirection(text2, from, to) {
     for (let i = from; i < to; i++) {
@@ -8775,22 +8775,22 @@
   var outerDecorations = /* @__PURE__ */ Facet.define();
   var atomicRanges = /* @__PURE__ */ Facet.define();
   var bidiIsolatedRanges = /* @__PURE__ */ Facet.define();
-  function getIsolatedRanges(view2, line) {
+  function getIsolatedRanges(view2, line2) {
     let isolates = view2.state.facet(bidiIsolatedRanges);
     if (!isolates.length)
       return isolates;
     let sets = isolates.map((i) => i instanceof Function ? i(view2) : i);
     let result = [];
-    RangeSet.spans(sets, line.from, line.to, {
+    RangeSet.spans(sets, line2.from, line2.to, {
       point() {
       },
       span(fromDoc, toDoc, active, open) {
-        let from = fromDoc - line.from, to = toDoc - line.from;
+        let from = fromDoc - line2.from, to = toDoc - line2.from;
         let level = result;
         for (let i = active.length - 1; i >= 0; i--, open--) {
           let direction = active[i].spec.bidiIsolate, update3;
           if (direction == null)
-            direction = autoDirection(line.text, from, to);
+            direction = autoDirection(line2.text, from, to);
           if (open > 0 && level.length && (update3 = level[level.length - 1]).to == from && update3.direction == direction) {
             update3.to = to;
             level = update3.inner;
@@ -9050,9 +9050,9 @@
       cur.flags |= 8;
       for (let { deco } of composition.marks)
         cur = new MarkView(deco, [cur], cur.length);
-      let line = new LineView();
-      line.append(cur, 0);
-      return line;
+      let line2 = new LineView();
+      line2.append(cur, 0);
+      return line2;
     }
     fixCompositionDOM(composition) {
       let fix = (dom, cView2) => {
@@ -9149,11 +9149,11 @@
       let { anchorNode, anchorOffset } = view2.observer.selectionRange;
       if (!sel || !cursor.empty || !cursor.assoc || !sel.modify)
         return;
-      let line = LineView.find(this, cursor.head);
-      if (!line)
+      let line2 = LineView.find(this, cursor.head);
+      if (!line2)
         return;
-      let lineStart = line.posAtStart;
-      if (cursor.head == lineStart || cursor.head == lineStart + line.length)
+      let lineStart = line2.posAtStart;
+      if (cursor.head == lineStart || cursor.head == lineStart + line2.length)
         return;
       let before = this.coordsAt(cursor.head, -1), after = this.coordsAt(cursor.head, 1);
       if (!before || !after || before.bottom > after.top)
@@ -9495,32 +9495,32 @@
   }
   function groupAt(state, pos, bias = 1) {
     let categorize = state.charCategorizer(pos);
-    let line = state.doc.lineAt(pos), linePos = pos - line.from;
-    if (line.length == 0)
+    let line2 = state.doc.lineAt(pos), linePos = pos - line2.from;
+    if (line2.length == 0)
       return EditorSelection.cursor(pos);
     if (linePos == 0)
       bias = 1;
-    else if (linePos == line.length)
+    else if (linePos == line2.length)
       bias = -1;
     let from = linePos, to = linePos;
     if (bias < 0)
-      from = findClusterBreak(line.text, linePos, false);
+      from = findClusterBreak(line2.text, linePos, false);
     else
-      to = findClusterBreak(line.text, linePos);
-    let cat = categorize(line.text.slice(from, to));
+      to = findClusterBreak(line2.text, linePos);
+    let cat = categorize(line2.text.slice(from, to));
     while (from > 0) {
-      let prev = findClusterBreak(line.text, from, false);
-      if (categorize(line.text.slice(prev, from)) != cat)
+      let prev = findClusterBreak(line2.text, from, false);
+      if (categorize(line2.text.slice(prev, from)) != cat)
         break;
       from = prev;
     }
-    while (to < line.length) {
-      let next = findClusterBreak(line.text, to);
-      if (categorize(line.text.slice(to, next)) != cat)
+    while (to < line2.length) {
+      let next = findClusterBreak(line2.text, to);
+      if (categorize(line2.text.slice(to, next)) != cat)
         break;
       to = next;
     }
-    return EditorSelection.range(from + line.from, to + line.from);
+    return EditorSelection.range(from + line2.from, to + line2.from);
   }
   function getdx(x2, rect) {
     return rect.left > x2 ? rect.left - x2 : Math.max(0, x2 - rect.right);
@@ -9673,10 +9673,10 @@
       }
     }
     if (!node || !view2.docView.dom.contains(node)) {
-      let line = LineView.find(view2.docView, lineStart);
-      if (!line)
+      let line2 = LineView.find(view2.docView, lineStart);
+      if (!line2)
         return yOffset > block.top + block.height / 2 ? block.to : block.from;
-      ({ node, offset } = domPosAtCoords(line.dom, x2, y2));
+      ({ node, offset } = domPosAtCoords(line2.dom, x2, y2));
     }
     let nearest = view2.docView.nearest(node);
     if (!nearest)
@@ -9692,8 +9692,8 @@
     let into = Math.round((x2 - contentRect.left) * view2.defaultCharacterWidth);
     if (view2.lineWrapping && block.height > view2.defaultLineHeight * 1.5) {
       let textHeight = view2.viewState.heightOracle.textHeight;
-      let line = Math.floor((y2 - block.top - (view2.defaultLineHeight - textHeight) * 0.5) / textHeight);
-      into += line * view2.viewState.heightOracle.lineLength;
+      let line2 = Math.floor((y2 - block.top - (view2.defaultLineHeight - textHeight) * 0.5) / textHeight);
+      into += line2 * view2.viewState.heightOracle.lineLength;
     }
     let content2 = view2.state.sliceDoc(block.from, block.to);
     return block.from + findColumn(content2, into, view2.state.tabSize);
@@ -9722,20 +9722,20 @@
     return x2 - rect.left > 5;
   }
   function blockAt(view2, pos) {
-    let line = view2.lineBlockAt(pos);
-    if (Array.isArray(line.type))
-      for (let l of line.type) {
-        if (l.to > pos || l.to == pos && (l.to == line.to || l.type == BlockType.Text))
+    let line2 = view2.lineBlockAt(pos);
+    if (Array.isArray(line2.type))
+      for (let l of line2.type) {
+        if (l.to > pos || l.to == pos && (l.to == line2.to || l.type == BlockType.Text))
           return l;
       }
-    return line;
+    return line2;
   }
   function moveToLineBoundary(view2, start2, forward, includeWrap) {
-    let line = blockAt(view2, start2.head);
-    let coords = !includeWrap || line.type != BlockType.Text || !(view2.lineWrapping || line.widgetLineBreaks) ? null : view2.coordsAtPos(start2.assoc < 0 && start2.head > line.from ? start2.head - 1 : start2.head);
+    let line2 = blockAt(view2, start2.head);
+    let coords = !includeWrap || line2.type != BlockType.Text || !(view2.lineWrapping || line2.widgetLineBreaks) ? null : view2.coordsAtPos(start2.assoc < 0 && start2.head > line2.from ? start2.head - 1 : start2.head);
     if (coords) {
       let editorRect = view2.dom.getBoundingClientRect();
-      let direction = view2.textDirectionAt(line.from);
+      let direction = view2.textDirectionAt(line2.from);
       let pos = view2.posAtCoords({
         x: forward == (direction == Direction.LTR) ? editorRect.right - 1 : editorRect.left + 1,
         y: (coords.top + coords.bottom) / 2
@@ -9743,20 +9743,20 @@
       if (pos != null)
         return EditorSelection.cursor(pos, forward ? -1 : 1);
     }
-    return EditorSelection.cursor(forward ? line.to : line.from, forward ? -1 : 1);
+    return EditorSelection.cursor(forward ? line2.to : line2.from, forward ? -1 : 1);
   }
   function moveByChar(view2, start2, forward, by) {
-    let line = view2.state.doc.lineAt(start2.head), spans = view2.bidiSpans(line);
-    let direction = view2.textDirectionAt(line.from);
+    let line2 = view2.state.doc.lineAt(start2.head), spans = view2.bidiSpans(line2);
+    let direction = view2.textDirectionAt(line2.from);
     for (let cur = start2, check2 = null; ; ) {
-      let next = moveVisually(line, spans, direction, cur, forward), char2 = movedOver;
+      let next = moveVisually(line2, spans, direction, cur, forward), char2 = movedOver;
       if (!next) {
-        if (line.number == (forward ? view2.state.doc.lines : 1))
+        if (line2.number == (forward ? view2.state.doc.lines : 1))
           return cur;
         char2 = "\n";
-        line = view2.state.doc.line(line.number + (forward ? 1 : -1));
-        spans = view2.bidiSpans(line);
-        next = view2.visualLineSide(line, !forward);
+        line2 = view2.state.doc.line(line2.number + (forward ? 1 : -1));
+        spans = view2.bidiSpans(line2);
+        next = view2.visualLineSide(line2, !forward);
       }
       if (!check2) {
         if (!by)
@@ -9790,10 +9790,10 @@
         goal = startCoords.left - rect.left;
       startY = dir < 0 ? startCoords.top : startCoords.bottom;
     } else {
-      let line = view2.viewState.lineBlockAt(startPos);
+      let line2 = view2.viewState.lineBlockAt(startPos);
       if (goal == null)
-        goal = Math.min(rect.right - rect.left, view2.defaultCharacterWidth * (startPos - line.from));
-      startY = (dir < 0 ? line.top : line.bottom) + docTop;
+        goal = Math.min(rect.right - rect.left, view2.defaultCharacterWidth * (startPos - line2.from));
+      startY = (dir < 0 ? line2.top : line2.bottom) + docTop;
     }
     let resolvedGoal = rect.left + goal;
     let dist2 = distance !== null && distance !== void 0 ? distance : view2.viewState.heightOracle.textHeight >> 1;
@@ -9912,10 +9912,10 @@
         if (point2.node == node && node.childNodes[point2.offset] == next)
           point2.pos = this.text.length;
     }
-    findPointInside(node, length4) {
+    findPointInside(node, length5) {
       for (let point2 of this.points)
         if (node.nodeType == 3 ? point2.node == node : node.contains(point2.node))
-          point2.pos = this.text.length + (isAtEnd(node, point2.node, point2.offset) ? length4 : 0);
+          point2.pos = this.text.length + (isAtEnd(node, point2.node, point2.offset) ? length5 : 0);
     }
   };
   function isAtEnd(parent, node, offset) {
@@ -10498,22 +10498,22 @@
     if (linewise) {
       let lastLine = -1;
       changes = state.changeByRange((range4) => {
-        let line = state.doc.lineAt(range4.from);
-        if (line.from == lastLine)
+        let line2 = state.doc.lineAt(range4.from);
+        if (line2.from == lastLine)
           return { range: range4 };
-        lastLine = line.from;
+        lastLine = line2.from;
         let insert4 = state.toText((byLine ? text2.line(i++).text : input) + state.lineBreak);
         return {
-          changes: { from: line.from, insert: insert4 },
+          changes: { from: line2.from, insert: insert4 },
           range: EditorSelection.cursor(range4.from + insert4.length)
         };
       });
     } else if (byLine) {
       changes = state.changeByRange((range4) => {
-        let line = text2.line(i++);
+        let line2 = text2.line(i++);
         return {
-          changes: { from: range4.from, to: range4.to, insert: line.text },
-          range: EditorSelection.cursor(range4.from + line.length)
+          changes: { from: range4.from, to: range4.to, insert: line2.text },
+          range: EditorSelection.cursor(range4.from + line2.length)
         };
       });
     } else {
@@ -10577,27 +10577,27 @@
     } else if (type2 == 2) {
       return groupAt(view2.state, pos, bias);
     } else {
-      let visual = LineView.find(view2.docView, pos), line = view2.state.doc.lineAt(visual ? visual.posAtEnd : pos);
-      let from = visual ? visual.posAtStart : line.from, to = visual ? visual.posAtEnd : line.to;
-      if (to < view2.state.doc.length && to == line.to)
+      let visual = LineView.find(view2.docView, pos), line2 = view2.state.doc.lineAt(visual ? visual.posAtEnd : pos);
+      let from = visual ? visual.posAtStart : line2.from, to = visual ? visual.posAtEnd : line2.to;
+      if (to < view2.state.doc.length && to == line2.to)
         to++;
       return EditorSelection.range(from, to);
     }
   }
   var inside = (x2, y2, rect) => y2 >= rect.top && y2 <= rect.bottom && x2 >= rect.left && x2 <= rect.right;
   function findPositionSide(view2, pos, x2, y2) {
-    let line = LineView.find(view2.docView, pos);
-    if (!line)
+    let line2 = LineView.find(view2.docView, pos);
+    if (!line2)
       return 1;
-    let off = pos - line.posAtStart;
+    let off = pos - line2.posAtStart;
     if (off == 0)
       return 1;
-    if (off == line.length)
+    if (off == line2.length)
       return -1;
-    let before = line.coordsAt(off, -1);
+    let before = line2.coordsAt(off, -1);
     if (before && inside(x2, y2, before))
       return -1;
-    let after = line.coordsAt(off, 1);
+    let after = line2.coordsAt(off, 1);
     if (after && inside(x2, y2, after))
       return 1;
     return before && before.bottom >= y2 ? -1 : 1;
@@ -10765,12 +10765,12 @@
     if (!content2.length) {
       let upto = -1;
       for (let { from } of state.selection.ranges) {
-        let line = state.doc.lineAt(from);
-        if (line.number > upto) {
-          content2.push(line.text);
-          ranges.push({ from: line.from, to: Math.min(state.doc.length, line.to + 1) });
+        let line2 = state.doc.lineAt(from);
+        if (line2.number > upto) {
+          content2.push(line2.text);
+          ranges.push({ from: line2.from, to: Math.min(state.doc.length, line2.to + 1) });
         }
-        upto = line.number;
+        upto = line2.number;
       }
       linewise = true;
     }
@@ -10927,10 +10927,10 @@
         lines += Math.max(0, Math.ceil((to - from - lines * this.lineLength * 0.5) / this.lineLength));
       return this.lineHeight * lines;
     }
-    heightForLine(length4) {
+    heightForLine(length5) {
       if (!this.lineWrapping)
         return this.lineHeight;
-      let lines = 1 + Math.max(0, Math.ceil((length4 - this.lineLength) / (this.lineLength - 5)));
+      let lines = 1 + Math.max(0, Math.ceil((length5 - this.lineLength) / (this.lineLength - 5)));
       return lines * this.lineHeight;
     }
     setDoc(doc2) {
@@ -10985,9 +10985,9 @@
     }
   };
   var BlockInfo = class {
-    constructor(from, length4, top3, height, _content) {
+    constructor(from, length5, top3, height, _content) {
       this.from = from;
-      this.length = length4;
+      this.length = length5;
       this.top = top3;
       this.height = height;
       this._content = _content;
@@ -11020,8 +11020,8 @@
   }(QueryType || (QueryType = {}));
   var Epsilon = 1e-3;
   var HeightMap = class {
-    constructor(length4, height, flags = 2) {
-      this.length = length4;
+    constructor(length5, height, flags = 2) {
+      this.length = length5;
       this.height = height;
       this.flags = flags;
     }
@@ -11127,8 +11127,8 @@
   }
   HeightMap.prototype.size = 1;
   var HeightMapBlock = class extends HeightMap {
-    constructor(length4, height, deco) {
-      super(length4, height);
+    constructor(length5, height, deco) {
+      super(length5, height);
       this.deco = deco;
     }
     blockAt(_height, _oracle, top3, offset) {
@@ -11152,8 +11152,8 @@
     }
   };
   var HeightMapText = class extends HeightMapBlock {
-    constructor(length4, height) {
-      super(length4, height, null);
+    constructor(length5, height) {
+      super(length5, height, null);
       this.collapsed = 0;
       this.widgetHeight = 0;
       this.breaks = 0;
@@ -11188,8 +11188,8 @@
     }
   };
   var HeightMapGap = class extends HeightMap {
-    constructor(length4) {
-      super(length4, 0);
+    constructor(length5) {
+      super(length5, 0);
     }
     heightMetrics(oracle, offset) {
       let firstLine = oracle.doc.lineAt(offset).number, lastLine = oracle.doc.lineAt(offset + this.length).number;
@@ -11209,13 +11209,13 @@
       let { firstLine, lastLine, perLine, perChar } = this.heightMetrics(oracle, offset);
       if (oracle.lineWrapping) {
         let guess = offset + (height < oracle.lineHeight ? 0 : Math.round(Math.max(0, Math.min(1, (height - top3) / this.height)) * this.length));
-        let line = oracle.doc.lineAt(guess), lineHeight = perLine + line.length * perChar;
+        let line2 = oracle.doc.lineAt(guess), lineHeight = perLine + line2.length * perChar;
         let lineTop = Math.max(top3, height - lineHeight / 2);
-        return new BlockInfo(line.from, line.length, lineTop, lineHeight, 0);
+        return new BlockInfo(line2.from, line2.length, lineTop, lineHeight, 0);
       } else {
-        let line = Math.max(0, Math.min(lastLine - firstLine, Math.floor((height - top3) / perLine)));
-        let { from, length: length4 } = oracle.doc.line(firstLine + line);
-        return new BlockInfo(from, length4, top3 + perLine * line, perLine, 0);
+        let line2 = Math.max(0, Math.min(lastLine - firstLine, Math.floor((height - top3) / perLine)));
+        let { from, length: length5 } = oracle.doc.line(firstLine + line2);
+        return new BlockInfo(from, length5, top3 + perLine * line2, perLine, 0);
       }
     }
     lineAt(value, type2, oracle, top3, offset) {
@@ -11226,25 +11226,25 @@
         return new BlockInfo(from, to - from, 0, 0, 0);
       }
       let { firstLine, perLine, perChar } = this.heightMetrics(oracle, offset);
-      let line = oracle.doc.lineAt(value), lineHeight = perLine + line.length * perChar;
-      let linesAbove = line.number - firstLine;
-      let lineTop = top3 + perLine * linesAbove + perChar * (line.from - offset - linesAbove);
-      return new BlockInfo(line.from, line.length, Math.max(top3, Math.min(lineTop, top3 + this.height - lineHeight)), lineHeight, 0);
+      let line2 = oracle.doc.lineAt(value), lineHeight = perLine + line2.length * perChar;
+      let linesAbove = line2.number - firstLine;
+      let lineTop = top3 + perLine * linesAbove + perChar * (line2.from - offset - linesAbove);
+      return new BlockInfo(line2.from, line2.length, Math.max(top3, Math.min(lineTop, top3 + this.height - lineHeight)), lineHeight, 0);
     }
     forEachLine(from, to, oracle, top3, offset, f) {
       from = Math.max(from, offset);
       to = Math.min(to, offset + this.length);
       let { firstLine, perLine, perChar } = this.heightMetrics(oracle, offset);
       for (let pos = from, lineTop = top3; pos <= to; ) {
-        let line = oracle.doc.lineAt(pos);
+        let line2 = oracle.doc.lineAt(pos);
         if (pos == from) {
-          let linesAbove = line.number - firstLine;
+          let linesAbove = line2.number - firstLine;
           lineTop += perLine * linesAbove + perChar * (from - offset - linesAbove);
         }
-        let lineHeight = perLine + perChar * line.length;
-        f(new BlockInfo(line.from, line.length, lineTop, lineHeight, 0));
+        let lineHeight = perLine + perChar * line2.length;
+        f(new BlockInfo(line2.from, line2.length, lineTop, lineHeight, 0));
         lineTop += lineHeight;
-        pos = line.to + 1;
+        pos = line2.to + 1;
       }
     }
     replace(from, to, nodes) {
@@ -11286,9 +11286,9 @@
             singleHeight = height;
           else if (Math.abs(height - singleHeight) >= Epsilon)
             singleHeight = -2;
-          let line = new HeightMapText(len, height);
-          line.outdated = false;
-          nodes.push(line);
+          let line2 = new HeightMapText(len, height);
+          line2.outdated = false;
+          nodes.push(line2);
           pos += len + 1;
         }
         if (pos <= end)
@@ -11504,9 +11504,9 @@
       let last3 = this.nodes.length ? this.nodes[this.nodes.length - 1] : null;
       if (last3 instanceof HeightMapText)
         return last3;
-      let line = new HeightMapText(0, -1);
-      this.nodes.push(line);
-      return line;
+      let line2 = new HeightMapText(0, -1);
+      this.nodes.push(line2);
+      return line2;
     }
     addBlock(block) {
       this.enterLine();
@@ -11518,13 +11518,13 @@
       if (deco && deco.endSide > 0)
         this.covering = block;
     }
-    addLineDeco(height, breaks, length4) {
-      let line = this.ensureLine();
-      line.length += length4;
-      line.collapsed += length4;
-      line.widgetHeight = Math.max(line.widgetHeight, height);
-      line.breaks += breaks;
-      this.writtenTo = this.pos = this.pos + length4;
+    addLineDeco(height, breaks, length5) {
+      let line2 = this.ensureLine();
+      line2.length += length5;
+      line2.collapsed += length5;
+      line2.widgetHeight = Math.max(line2.widgetHeight, height);
+      line2.breaks += breaks;
+      this.writtenTo = this.pos = this.pos + length5;
     }
     finish(from) {
       let last3 = this.nodes.length == 0 ? null : this.nodes[this.nodes.length - 1];
@@ -11895,7 +11895,7 @@
       if (this.defaultTextDirection != Direction.LTR && !wrapping)
         return [];
       let gaps = [];
-      let addGap = (from, to, line, structure) => {
+      let addGap = (from, to, line2, structure) => {
         if (to - from < halfMargin)
           return;
         let sel = this.state.selection.main, avoid = [sel.from];
@@ -11903,26 +11903,26 @@
           avoid.push(sel.to);
         for (let pos of avoid) {
           if (pos > from && pos < to) {
-            addGap(from, pos - 10, line, structure);
-            addGap(pos + 10, to, line, structure);
+            addGap(from, pos - 10, line2, structure);
+            addGap(pos + 10, to, line2, structure);
             return;
           }
         }
-        let gap = find2(current, (gap2) => gap2.from >= line.from && gap2.to <= line.to && Math.abs(gap2.from - from) < halfMargin && Math.abs(gap2.to - to) < halfMargin && !avoid.some((pos) => gap2.from < pos && gap2.to > pos));
+        let gap = find2(current, (gap2) => gap2.from >= line2.from && gap2.to <= line2.to && Math.abs(gap2.from - from) < halfMargin && Math.abs(gap2.to - to) < halfMargin && !avoid.some((pos) => gap2.from < pos && gap2.to > pos));
         if (!gap) {
-          if (to < line.to && mayMeasure && wrapping && mayMeasure.visibleRanges.some((r) => r.from <= to && r.to >= to)) {
+          if (to < line2.to && mayMeasure && wrapping && mayMeasure.visibleRanges.some((r) => r.from <= to && r.to >= to)) {
             let lineStart = mayMeasure.moveToLineBoundary(EditorSelection.cursor(to), false, true).head;
             if (lineStart > from)
               to = lineStart;
           }
-          gap = new LineGap(from, to, this.gapSize(line, from, to, structure));
+          gap = new LineGap(from, to, this.gapSize(line2, from, to, structure));
         }
         gaps.push(gap);
       };
-      let checkLine = (line) => {
-        if (line.length < doubleMargin || line.type != BlockType.Text)
+      let checkLine = (line2) => {
+        if (line2.length < doubleMargin || line2.type != BlockType.Text)
           return;
-        let structure = lineStructure(line.from, line.to, this.stateDeco);
+        let structure = lineStructure(line2.from, line2.to, this.stateDeco);
         if (structure.total < doubleMargin)
           return;
         let target = this.scrollTarget ? this.scrollTarget.range.head : null;
@@ -11932,12 +11932,12 @@
           let top3, bot;
           if (target != null) {
             let targetFrac = findFraction(structure, target);
-            let spaceFrac = ((this.visibleBottom - this.visibleTop) / 2 + marginHeight) / line.height;
+            let spaceFrac = ((this.visibleBottom - this.visibleTop) / 2 + marginHeight) / line2.height;
             top3 = targetFrac - spaceFrac;
             bot = targetFrac + spaceFrac;
           } else {
-            top3 = (this.visibleTop - line.top - marginHeight) / line.height;
-            bot = (this.visibleBottom - line.top + marginHeight) / line.height;
+            top3 = (this.visibleTop - line2.top - marginHeight) / line2.height;
+            bot = (this.visibleBottom - line2.top + marginHeight) / line2.height;
           }
           viewFrom = findPosition(structure, top3);
           viewTo = findPosition(structure, bot);
@@ -11957,23 +11957,23 @@
           viewFrom = findPosition(structure, left2);
           viewTo = findPosition(structure, right2);
         }
-        if (viewFrom > line.from)
-          addGap(line.from, viewFrom, line, structure);
-        if (viewTo < line.to)
-          addGap(viewTo, line.to, line, structure);
+        if (viewFrom > line2.from)
+          addGap(line2.from, viewFrom, line2, structure);
+        if (viewTo < line2.to)
+          addGap(viewTo, line2.to, line2, structure);
       };
-      for (let line of this.viewportLines) {
-        if (Array.isArray(line.type))
-          line.type.forEach(checkLine);
+      for (let line2 of this.viewportLines) {
+        if (Array.isArray(line2.type))
+          line2.type.forEach(checkLine);
         else
-          checkLine(line);
+          checkLine(line2);
       }
       return gaps;
     }
-    gapSize(line, from, to, structure) {
+    gapSize(line2, from, to, structure) {
       let fraction = findFraction(structure, to) - findFraction(structure, from);
       if (this.heightOracle.lineWrapping) {
-        return line.height * fraction;
+        return line2.height * fraction;
       } else {
         return structure.total * this.heightOracle.charWidth * fraction;
       }
@@ -13432,10 +13432,10 @@
     moveByGroup(start2, forward) {
       return skipAtoms(this, start2, moveByChar(this, start2, forward, (initial) => byGroup(this, start2.head, initial)));
     }
-    visualLineSide(line, end) {
-      let order = this.bidiSpans(line), dir = this.textDirectionAt(line.from);
+    visualLineSide(line2, end) {
+      let order = this.bidiSpans(line2), dir = this.textDirectionAt(line2.from);
       let span2 = order[end ? order.length - 1 : 0];
-      return EditorSelection.cursor(span2.side(end, dir) + line.from, span2.forward(!end, dir) ? 1 : -1);
+      return EditorSelection.cursor(span2.side(end, dir) + line2.from, span2.forward(!end, dir) ? 1 : -1);
     }
     moveToLineBoundary(start2, forward, includeWrap = true) {
       return moveToLineBoundary(this, start2, forward, includeWrap);
@@ -13458,8 +13458,8 @@
       let rect = this.docView.coordsAt(pos, side);
       if (!rect || rect.left == rect.right)
         return rect;
-      let line = this.state.doc.lineAt(pos), order = this.bidiSpans(line);
-      let span2 = order[BidiSpan.find(order, pos - line.from, -1, side)];
+      let line2 = this.state.doc.lineAt(pos), order = this.bidiSpans(line2);
+      let span2 = order[BidiSpan.find(order, pos - line2.from, -1, side)];
       return flattenRect(rect, span2.dir == Direction.LTR == side > 0);
     }
     coordsForChar(pos) {
@@ -13485,18 +13485,18 @@
     get lineWrapping() {
       return this.viewState.heightOracle.lineWrapping;
     }
-    bidiSpans(line) {
-      if (line.length > MaxBidiLine)
-        return trivialOrder(line.length);
-      let dir = this.textDirectionAt(line.from), isolates;
+    bidiSpans(line2) {
+      if (line2.length > MaxBidiLine)
+        return trivialOrder(line2.length);
+      let dir = this.textDirectionAt(line2.from), isolates;
       for (let entry of this.bidiCache) {
-        if (entry.from == line.from && entry.dir == dir && (entry.fresh || isolatesEq(entry.isolates, isolates = getIsolatedRanges(this, line))))
+        if (entry.from == line2.from && entry.dir == dir && (entry.fresh || isolatesEq(entry.isolates, isolates = getIsolatedRanges(this, line2))))
           return entry.order;
       }
       if (!isolates)
-        isolates = getIsolatedRanges(this, line);
-      let order = computeOrder(line.text, dir, isolates);
-      this.bidiCache.push(new CachedOrder(line.from, line.to, dir, isolates, true, order));
+        isolates = getIsolatedRanges(this, line2);
+      let order = computeOrder(line2.text, dir, isolates);
+      this.bidiCache.push(new CachedOrder(line2.from, line2.to, dir, isolates, true, order));
       return order;
     }
     get hasFocus() {
@@ -14024,11 +14024,11 @@
     IterMode2[IterMode2["IgnoreOverlays"] = 8] = "IgnoreOverlays";
   })(IterMode || (IterMode = {}));
   var Tree = class {
-    constructor(type2, children2, positions, length4, props) {
+    constructor(type2, children2, positions, length5, props) {
       this.type = type2;
       this.children = children2;
       this.positions = positions;
-      this.length = length4;
+      this.length = length5;
       this.props = null;
       if (props && props.length) {
         this.props = /* @__PURE__ */ Object.create(null);
@@ -14109,7 +14109,7 @@
       return result;
     }
     balance(config = {}) {
-      return this.children.length <= 8 ? this : balanceRange(NodeType.none, this.children, this.positions, 0, this.children.length, 0, this.length, (children2, positions, length4) => new Tree(this.type, children2, positions, length4, this.propValues), config.makeTree || ((children2, positions, length4) => new Tree(NodeType.none, children2, positions, length4)));
+      return this.children.length <= 8 ? this : balanceRange(NodeType.none, this.children, this.positions, 0, this.children.length, 0, this.length, (children2, positions, length5) => new Tree(this.type, children2, positions, length5, this.propValues), config.makeTree || ((children2, positions, length5) => new Tree(NodeType.none, children2, positions, length5)));
     }
     static build(data) {
       return buildTree(data);
@@ -14144,9 +14144,9 @@
     }
   };
   var TreeBuffer = class {
-    constructor(buffer, length4, set3) {
+    constructor(buffer, length5, set3) {
       this.buffer = buffer;
-      this.length = length4;
+      this.length = length5;
       this.set = set3;
     }
     get type() {
@@ -14864,15 +14864,15 @@
       }
     }
     function makeBalanced(type2) {
-      return (children3, positions2, length5) => {
+      return (children3, positions2, length6) => {
         let lookAhead2 = 0, lastI = children3.length - 1, last3, lookAheadProp;
         if (lastI >= 0 && (last3 = children3[lastI]) instanceof Tree) {
-          if (!lastI && last3.type == type2 && last3.length == length5)
+          if (!lastI && last3.type == type2 && last3.length == length6)
             return last3;
           if (lookAheadProp = last3.prop(NodeProp.lookAhead))
             lookAhead2 = positions2[lastI] + last3.length + lookAheadProp;
         }
-        return makeTree(type2, children3, positions2, length5, lookAhead2);
+        return makeTree(type2, children3, positions2, length6, lookAhead2);
       };
     }
     function makeRepeatLeaf(children3, positions2, base2, i, from, to, type2, lookAhead2) {
@@ -14884,7 +14884,7 @@
       children3.push(makeTree(nodeSet.types[type2], localChildren, localPositions, to - from, lookAhead2 - to));
       positions2.push(from - base2);
     }
-    function makeTree(type2, children3, positions2, length5, lookAhead2 = 0, props) {
+    function makeTree(type2, children3, positions2, length6, lookAhead2 = 0, props) {
       if (contextHash) {
         let pair = [NodeProp.contextHash, contextHash];
         props = props ? [pair].concat(props) : [pair];
@@ -14893,7 +14893,7 @@
         let pair = [NodeProp.lookAhead, lookAhead2];
         props = props ? [pair].concat(props) : [pair];
       }
-      return new Tree(type2, children3, positions2, length5, props);
+      return new Tree(type2, children3, positions2, length6, props);
     }
     function findBufferSize(maxSize, inRepeat) {
       let fork = cursor.fork();
@@ -14963,8 +14963,8 @@
     let children2 = [], positions = [];
     while (cursor.pos > 0)
       takeNode(data.start || 0, data.bufferStart || 0, children2, positions, -1, 0);
-    let length4 = (_a2 = data.length) !== null && _a2 !== void 0 ? _a2 : children2.length ? positions[0] + children2[0].length : 0;
-    return new Tree(types2[data.topID], children2.reverse(), positions.reverse(), length4);
+    let length5 = (_a2 = data.length) !== null && _a2 !== void 0 ? _a2 : children2.length ? positions[0] + children2[0].length : 0;
+    return new Tree(types2[data.topID], children2.reverse(), positions.reverse(), length5);
   }
   var nodeSizeCache = /* @__PURE__ */ new WeakMap();
   function nodeSize(balanceType, node) {
@@ -14984,7 +14984,7 @@
     }
     return size3;
   }
-  function balanceRange(balanceType, children2, positions, from, to, start2, length4, mkTop, mkTree) {
+  function balanceRange(balanceType, children2, positions, from, to, start2, length5, mkTop, mkTree) {
     let total = 0;
     for (let i = from; i < to; i++)
       total += nodeSize(balanceType, children2[i]);
@@ -15008,14 +15008,14 @@
           }
           localChildren.push(children3[groupFrom]);
         } else {
-          let length5 = positions2[i - 1] + children3[i - 1].length - groupStart;
-          localChildren.push(balanceRange(balanceType, children3, positions2, groupFrom, i, groupStart, length5, null, mkTree));
+          let length6 = positions2[i - 1] + children3[i - 1].length - groupStart;
+          localChildren.push(balanceRange(balanceType, children3, positions2, groupFrom, i, groupStart, length6, null, mkTree));
         }
         localPositions.push(groupStart + offset - start2);
       }
     }
     divide2(children2, positions, from, to, 0);
-    return (mkTop || mkTree)(localChildren, localPositions, length4);
+    return (mkTop || mkTree)(localChildren, localPositions, length5);
   }
   var TreeFragment = class {
     constructor(from, to, tree, offset, openStart = false, openEnd = false) {
@@ -15873,17 +15873,17 @@
       this.unit = getIndentUnit(state);
     }
     lineAt(pos, bias = 1) {
-      let line = this.state.doc.lineAt(pos);
+      let line2 = this.state.doc.lineAt(pos);
       let { simulateBreak, simulateDoubleBreak } = this.options;
-      if (simulateBreak != null && simulateBreak >= line.from && simulateBreak <= line.to) {
+      if (simulateBreak != null && simulateBreak >= line2.from && simulateBreak <= line2.to) {
         if (simulateDoubleBreak && simulateBreak == pos)
           return { text: "", from: pos };
         else if (bias < 0 ? simulateBreak < pos : simulateBreak <= pos)
-          return { text: line.text.slice(simulateBreak - line.from), from: simulateBreak };
+          return { text: line2.text.slice(simulateBreak - line2.from), from: simulateBreak };
         else
-          return { text: line.text.slice(0, simulateBreak - line.from), from: line.from };
+          return { text: line2.text.slice(0, simulateBreak - line2.from), from: line2.from };
       }
-      return line;
+      return line2;
     }
     textAfterPos(pos, bias = 1) {
       if (this.options.simulateDoubleBreak && pos == this.options.simulateBreak)
@@ -15899,8 +15899,8 @@
         result += override - this.countColumn(text2, text2.search(/\S|$/));
       return result;
     }
-    countColumn(line, pos = line.length) {
-      return countColumn(line, this.state.tabSize, pos);
+    countColumn(line2, pos = line2.length) {
+      return countColumn(line2, this.state.tabSize, pos);
     }
     lineIndent(pos, bias = 1) {
       let { text: text2, from } = this.lineAt(pos, bias);
@@ -15974,16 +15974,16 @@
       return this.baseIndentFor(this.node);
     }
     baseIndentFor(node) {
-      let line = this.state.doc.lineAt(node.from);
+      let line2 = this.state.doc.lineAt(node.from);
       for (; ; ) {
-        let atBreak = node.resolve(line.from);
+        let atBreak = node.resolve(line2.from);
         while (atBreak.parent && atBreak.parent.from == atBreak.from)
           atBreak = atBreak.parent;
         if (isParent(atBreak, node))
           break;
-        line = this.state.doc.lineAt(atBreak.from);
+        line2 = this.state.doc.lineAt(atBreak.from);
       }
-      return this.lineIndent(line.from);
+      return this.lineIndent(line2.from);
     }
     continue() {
       return indentFor(this.context.next, this.base, this.pos);
@@ -16281,7 +16281,7 @@
 
   // node_modules/@codemirror/commands/dist/index.js
   var toggleComment = (target) => {
-    let { state } = target, line = state.doc.lineAt(state.selection.main.from), config = getConfig(target.state, line.from);
+    let { state } = target, line2 = state.doc.lineAt(state.selection.main.from), config = getConfig(target.state, line2.from);
     return config.line ? toggleLineComment(target) : config.block ? toggleBlockCommentByLine(target) : false;
   };
   function command(f, option) {
@@ -16381,17 +16381,17 @@
       if (!token2)
         continue;
       for (let pos = from; pos <= to; ) {
-        let line = state.doc.lineAt(pos);
-        if (line.from > prevLine && (from == to || to > line.from)) {
-          prevLine = line.from;
-          let indent = /^\s*/.exec(line.text)[0].length;
-          let empty4 = indent == line.length;
-          let comment2 = line.text.slice(indent, indent + token2.length) == token2 ? indent : -1;
-          if (indent < line.text.length && indent < minIndent)
+        let line2 = state.doc.lineAt(pos);
+        if (line2.from > prevLine && (from == to || to > line2.from)) {
+          prevLine = line2.from;
+          let indent = /^\s*/.exec(line2.text)[0].length;
+          let empty4 = indent == line2.length;
+          let comment2 = line2.text.slice(indent, indent + token2.length) == token2 ? indent : -1;
+          if (indent < line2.text.length && indent < minIndent)
             minIndent = indent;
-          lines.push({ line, comment: comment2, token: token2, indent, empty: empty4, single: false });
+          lines.push({ line: line2, comment: comment2, token: token2, indent, empty: empty4, single: false });
         }
-        pos = line.to + 1;
+        pos = line2.to + 1;
       }
       if (minIndent < 1e9) {
         for (let i = startI; i < lines.length; i++)
@@ -16403,17 +16403,17 @@
     }
     if (option != 2 && lines.some((l) => l.comment < 0 && (!l.empty || l.single))) {
       let changes = [];
-      for (let { line, token: token2, indent, empty: empty4, single } of lines)
+      for (let { line: line2, token: token2, indent, empty: empty4, single } of lines)
         if (single || !empty4)
-          changes.push({ from: line.from + indent, insert: token2 + " " });
+          changes.push({ from: line2.from + indent, insert: token2 + " " });
       let changeSet = state.changes(changes);
       return { changes: changeSet, selection: state.selection.map(changeSet, 1) };
     } else if (option != 1 && lines.some((l) => l.comment >= 0)) {
       let changes = [];
-      for (let { line, comment: comment2, token: token2 } of lines)
+      for (let { line: line2, comment: comment2, token: token2 } of lines)
         if (comment2 >= 0) {
-          let from = line.from + comment2, to = from + token2.length;
-          if (line.text[to - line.from] == " ")
+          let from = line2.from + comment2, to = from + token2.length;
+          if (line2.text[to - line2.from] == " ")
             to++;
           changes.push({ from, to });
         }
@@ -16508,16 +16508,16 @@
   function addMappingToBranch(branch, mapping) {
     if (!branch.length)
       return branch;
-    let length4 = branch.length, selections = none3;
-    while (length4) {
-      let event = mapEvent(branch[length4 - 1], mapping, selections);
+    let length5 = branch.length, selections = none3;
+    while (length5) {
+      let event = mapEvent(branch[length5 - 1], mapping, selections);
       if (event.changes && !event.changes.empty || event.effects.length) {
-        let result = branch.slice(0, length4);
-        result[length4 - 1] = event;
+        let result = branch.slice(0, length5);
+        result[length5 - 1] = event;
         return result;
       } else {
         mapping = event.mapped;
-        length4--;
+        length5--;
         selections = event.selectionsAfter;
       }
     }
@@ -16701,13 +16701,13 @@
   var cursorPageUp = (view2) => cursorByPage(view2, false);
   var cursorPageDown = (view2) => cursorByPage(view2, true);
   function moveByLineBoundary(view2, start2, forward) {
-    let line = view2.lineBlockAt(start2.head), moved = view2.moveToLineBoundary(start2, forward);
-    if (moved.head == start2.head && moved.head != (forward ? line.to : line.from))
+    let line2 = view2.lineBlockAt(start2.head), moved = view2.moveToLineBoundary(start2, forward);
+    if (moved.head == start2.head && moved.head != (forward ? line2.to : line2.from))
       moved = view2.moveToLineBoundary(start2, forward, false);
-    if (!forward && moved.head == line.from && line.length) {
-      let space2 = /^\s*/.exec(view2.state.sliceDoc(line.from, Math.min(line.from + 100, line.to)))[0].length;
-      if (space2 && start2.head != line.from + space2)
-        moved = EditorSelection.cursor(line.from + space2);
+    if (!forward && moved.head == line2.from && line2.length) {
+      let space2 = /^\s*/.exec(view2.state.sliceDoc(line2.from, Math.min(line2.from + 100, line2.to)))[0].length;
+      if (space2 && start2.head != line2.from + space2)
+        moved = EditorSelection.cursor(line2.from + space2);
     }
     return moved;
   }
@@ -16862,8 +16862,8 @@
     return pos;
   }
   var deleteByChar = (target, forward, byIndentUnit) => deleteBy(target, (range4) => {
-    let pos = range4.from, { state } = target, line = state.doc.lineAt(pos), before, targetPos;
-    if (byIndentUnit && !forward && pos > line.from && pos < line.from + 200 && !/[^ \t]/.test(before = line.text.slice(0, pos - line.from))) {
+    let pos = range4.from, { state } = target, line2 = state.doc.lineAt(pos), before, targetPos;
+    if (byIndentUnit && !forward && pos > line2.from && pos < line2.from + 200 && !/[^ \t]/.test(before = line2.text.slice(0, pos - line2.from))) {
       if (before[before.length - 1] == "	")
         return pos - 1;
       let col = countColumn(before, state.tabSize), drop3 = col % getIndentUnit(state) || getIndentUnit(state);
@@ -16871,27 +16871,27 @@
         pos--;
       targetPos = pos;
     } else {
-      targetPos = findClusterBreak(line.text, pos - line.from, forward, forward) + line.from;
-      if (targetPos == pos && line.number != (forward ? state.doc.lines : 1))
+      targetPos = findClusterBreak(line2.text, pos - line2.from, forward, forward) + line2.from;
+      if (targetPos == pos && line2.number != (forward ? state.doc.lines : 1))
         targetPos += forward ? 1 : -1;
-      else if (!forward && /[\ufe00-\ufe0f]/.test(line.text.slice(targetPos - line.from, pos - line.from)))
-        targetPos = findClusterBreak(line.text, targetPos - line.from, false, false) + line.from;
+      else if (!forward && /[\ufe00-\ufe0f]/.test(line2.text.slice(targetPos - line2.from, pos - line2.from)))
+        targetPos = findClusterBreak(line2.text, targetPos - line2.from, false, false) + line2.from;
     }
     return targetPos;
   });
   var deleteCharBackward = (view2) => deleteByChar(view2, false, true);
   var deleteCharForward = (view2) => deleteByChar(view2, true, false);
   var deleteByGroup = (target, forward) => deleteBy(target, (range4) => {
-    let pos = range4.head, { state } = target, line = state.doc.lineAt(pos);
+    let pos = range4.head, { state } = target, line2 = state.doc.lineAt(pos);
     let categorize = state.charCategorizer(pos);
     for (let cat = null; ; ) {
-      if (pos == (forward ? line.to : line.from)) {
-        if (pos == range4.head && line.number != (forward ? state.doc.lines : 1))
+      if (pos == (forward ? line2.to : line2.from)) {
+        if (pos == range4.head && line2.number != (forward ? state.doc.lines : 1))
           pos += forward ? 1 : -1;
         break;
       }
-      let next = findClusterBreak(line.text, pos - line.from, forward) + line.from;
-      let nextChar = line.text.slice(Math.min(pos, next) - line.from, Math.max(pos, next) - line.from);
+      let next = findClusterBreak(line2.text, pos - line2.from, forward) + line2.from;
+      let nextChar = line2.text.slice(Math.min(pos, next) - line2.from, Math.max(pos, next) - line2.from);
       let nextCat = categorize(nextChar);
       if (cat != null && nextCat != cat)
         break;
@@ -16933,9 +16933,9 @@
     let changes = state.changeByRange((range4) => {
       if (!range4.empty || range4.from == 0 || range4.from == state.doc.length)
         return { range: range4 };
-      let pos = range4.from, line = state.doc.lineAt(pos);
-      let from = pos == line.from ? pos - 1 : findClusterBreak(line.text, pos - line.from, false) + line.from;
-      let to = pos == line.to ? pos + 1 : findClusterBreak(line.text, pos - line.from, true) + line.from;
+      let pos = range4.from, line2 = state.doc.lineAt(pos);
+      let from = pos == line2.from ? pos - 1 : findClusterBreak(line2.text, pos - line2.from, false) + line2.from;
+      let to = pos == line2.to ? pos + 1 : findClusterBreak(line2.text, pos - line2.from, true) + line2.from;
       return {
         changes: { from, to, insert: state.doc.slice(pos, to).append(state.doc.slice(from, pos)) },
         range: EditorSelection.cursor(to)
@@ -17047,23 +17047,23 @@
       if (state.readOnly)
         return false;
       let changes = state.changeByRange((range4) => {
-        let { from, to } = range4, line = state.doc.lineAt(from);
+        let { from, to } = range4, line2 = state.doc.lineAt(from);
         let explode = !atEof && from == to && isBetweenBrackets(state, from);
         if (atEof)
-          from = to = (to <= line.to ? line : state.doc.lineAt(to)).to;
+          from = to = (to <= line2.to ? line2 : state.doc.lineAt(to)).to;
         let cx = new IndentContext(state, { simulateBreak: from, simulateDoubleBreak: !!explode });
         let indent = getIndentation(cx, from);
         if (indent == null)
           indent = countColumn(/^\s*/.exec(state.doc.lineAt(from).text)[0], state.tabSize);
-        while (to < line.to && /\s/.test(line.text[to - line.from]))
+        while (to < line2.to && /\s/.test(line2.text[to - line2.from]))
           to++;
         if (explode)
           ({ from, to } = explode);
-        else if (from > line.from && from < line.from + 100 && !/\S/.test(line.text.slice(0, from)))
-          from = line.from;
+        else if (from > line2.from && from < line2.from + 100 && !/\S/.test(line2.text.slice(0, from)))
+          from = line2.from;
         let insert4 = ["", indentString(state, indent)];
         if (explode)
-          insert4.push(indentString(state, cx.lineIndent(line.from, -1)));
+          insert4.push(indentString(state, cx.lineIndent(line2.from, -1)));
         return {
           changes: { from, to, insert: Text.of(insert4) },
           range: EditorSelection.cursor(from + 1 + insert4[1].length)
@@ -17078,12 +17078,12 @@
     return state.changeByRange((range4) => {
       let changes = [];
       for (let pos = range4.from; pos <= range4.to; ) {
-        let line = state.doc.lineAt(pos);
-        if (line.number > atLine && (range4.empty || range4.to > line.from)) {
-          f(line, changes, range4);
-          atLine = line.number;
+        let line2 = state.doc.lineAt(pos);
+        if (line2.number > atLine && (range4.empty || range4.to > line2.from)) {
+          f(line2, changes, range4);
+          atLine = line2.number;
         }
-        pos = line.to + 1;
+        pos = line2.to + 1;
       }
       let changeSet = state.changes(changes);
       return {
@@ -17100,17 +17100,17 @@
       let found = updated[start2];
       return found == null ? -1 : found;
     } });
-    let changes = changeBySelectedLine(state, (line, changes2, range4) => {
-      let indent = getIndentation(context, line.from);
+    let changes = changeBySelectedLine(state, (line2, changes2, range4) => {
+      let indent = getIndentation(context, line2.from);
       if (indent == null)
         return;
-      if (!/\S/.test(line.text))
+      if (!/\S/.test(line2.text))
         indent = 0;
-      let cur = /^\s*/.exec(line.text)[0];
+      let cur = /^\s*/.exec(line2.text)[0];
       let norm = indentString(state, indent);
-      if (cur != norm || range4.from < line.from + cur.length) {
-        updated[line.from] = indent;
-        changes2.push({ from: line.from, to: line.from + cur.length, insert: norm });
+      if (cur != norm || range4.from < line2.from + cur.length) {
+        updated[line2.from] = indent;
+        changes2.push({ from: line2.from, to: line2.from + cur.length, insert: norm });
       }
     });
     if (!changes.changes.empty)
@@ -17120,23 +17120,23 @@
   var indentMore = ({ state, dispatch: dispatch3 }) => {
     if (state.readOnly)
       return false;
-    dispatch3(state.update(changeBySelectedLine(state, (line, changes) => {
-      changes.push({ from: line.from, insert: state.facet(indentUnit) });
+    dispatch3(state.update(changeBySelectedLine(state, (line2, changes) => {
+      changes.push({ from: line2.from, insert: state.facet(indentUnit) });
     }), { userEvent: "input.indent" }));
     return true;
   };
   var indentLess = ({ state, dispatch: dispatch3 }) => {
     if (state.readOnly)
       return false;
-    dispatch3(state.update(changeBySelectedLine(state, (line, changes) => {
-      let space2 = /^\s*/.exec(line.text)[0];
+    dispatch3(state.update(changeBySelectedLine(state, (line2, changes) => {
+      let space2 = /^\s*/.exec(line2.text)[0];
       if (!space2)
         return;
       let col = countColumn(space2, state.tabSize), keep = 0;
       let insert4 = indentString(state, Math.max(0, col - getIndentUnit(state)));
       while (keep < space2.length && keep < insert4.length && space2.charCodeAt(keep) == insert4.charCodeAt(keep))
         keep++;
-      changes.push({ from: line.from + keep, to: line.from + space2.length, insert: insert4.slice(keep) });
+      changes.push({ from: line2.from + keep, to: line2.from + space2.length, insert: insert4.slice(keep) });
     }), { userEvent: "delete.dedent" }));
     return true;
   };
@@ -17645,24 +17645,6 @@
       return (b) => $0.apply($0.Functor0().map((v) => identity4)($1))(b);
     })(dictApplicative.pure());
   };
-  var maximumBy = (dictFoldable) => (cmp) => dictFoldable.foldl((v) => (v1) => {
-    if (v.tag === "Nothing") {
-      return $Maybe("Just", v1);
-    }
-    if (v.tag === "Just") {
-      return $Maybe("Just", cmp(v._1)(v1) === "GT" ? v._1 : v1);
-    }
-    fail();
-  })(Nothing);
-  var minimumBy = (dictFoldable) => (cmp) => dictFoldable.foldl((v) => (v1) => {
-    if (v.tag === "Nothing") {
-      return $Maybe("Just", v1);
-    }
-    if (v.tag === "Just") {
-      return $Maybe("Just", cmp(v._1)(v1) === "LT" ? v._1 : v1);
-    }
-    fail();
-  })(Nothing);
   var foldableTuple = { foldr: (f) => (z) => (v) => f(v._2)(z), foldl: (f) => (z) => (v) => f(z)(v._2), foldMap: (dictMonoid) => (f) => (v) => f(v._2) };
   var foldableArray = {
     foldr: foldrArray,
@@ -17702,6 +17684,18 @@
         },
         Eq0: () => eqTuple2
       };
+    };
+  };
+
+  // output-es/Data.FunctorWithIndex/foreign.js
+  var mapWithIndexArray = function(f) {
+    return function(xs) {
+      var l = xs.length;
+      var result = Array(l);
+      for (var i = 0; i < l; i++) {
+        result[i] = f(i)(xs[i]);
+      }
+      return result;
     };
   };
 
@@ -20032,6 +20026,17 @@
     fail();
   })());
   var unsafeIndex = (xs) => (i) => definitely("index within bounds")(i >= 0 && i < xs.length ? $Maybe("Just", xs[i]) : Nothing);
+  var nonEmptyListNonEmptyList = {
+    nonEmpty: (x2) => definitely("non-empty")((() => {
+      if (x2.tag === "Nil") {
+        return Nothing;
+      }
+      if (x2.tag === "Cons") {
+        return $Maybe("Just", $NonEmpty(x2._1, x2._2));
+      }
+      fail();
+    })())
+  };
   var defined = (x2) => {
     if (x2.tag === "Right") {
       return x2._1;
@@ -20079,15 +20084,6 @@
     }
     fail();
   };
-  var nonEmpty = (x2) => definitely("absurd")((() => {
-    if (x2.tag === "Nil") {
-      return Nothing;
-    }
-    if (x2.tag === "Cons") {
-      return $Maybe("Just", $NonEmpty(x2._1, x2._2));
-    }
-    fail();
-  })());
 
   // output-es/Util.Set/index.js
   var setSet = (dictOrd) => ({
@@ -20706,17 +20702,17 @@
           }
         }
       }
-      function onComplete(join2) {
+      function onComplete(join3) {
         return function() {
           if (status === COMPLETED) {
-            rethrow = rethrow && join2.rethrow;
-            join2.handler(step)();
+            rethrow = rethrow && join3.rethrow;
+            join3.handler(step)();
             return function() {
             };
           }
           var jid = joinId++;
           joins = joins || {};
-          joins[jid] = join2;
+          joins[jid] = join3;
           return function() {
             if (joins !== null) {
               delete joins[jid];
@@ -20771,7 +20767,7 @@
           return canceler;
         };
       }
-      function join(cb) {
+      function join2(cb) {
         return function() {
           var canceler = onComplete({
             rethrow: false,
@@ -20785,7 +20781,7 @@
       }
       return {
         kill,
-        join,
+        join: join2,
         onComplete,
         isSuspended: function() {
           return status === SUSPENDED;
@@ -20869,7 +20865,7 @@
         }
         return kills2;
       }
-      function join(result, head, tail) {
+      function join2(result, head, tail) {
         var fail3, step, lhs, rhs, tmp, kid;
         if (util2.isLeft(result)) {
           fail3 = result;
@@ -20916,9 +20912,9 @@
                       if (tmp) {
                         tmp = false;
                       } else if (tail === null) {
-                        join(fail3, null, null);
+                        join2(fail3, null, null);
                       } else {
-                        join(fail3, tail._1, tail._2);
+                        join2(fail3, tail._1, tail._2);
                       }
                     };
                   });
@@ -20953,9 +20949,9 @@
                       if (tmp) {
                         tmp = false;
                       } else if (tail === null) {
-                        join(step, null, null);
+                        join2(step, null, null);
                       } else {
-                        join(step, tail._1, tail._2);
+                        join2(step, tail._1, tail._2);
                       }
                     };
                   });
@@ -20979,7 +20975,7 @@
           return function() {
             delete fibers[fiber._1];
             fiber._3 = result;
-            join(result, fiber._2._1, fiber._2._2);
+            join2(result, fiber._2._1, fiber._2._2);
           };
         };
       }
@@ -21488,8 +21484,8 @@
         return function(unsafeCodePointAt02) {
           return function(index2) {
             return function(str) {
-              var length4 = str.length;
-              if (index2 < 0 || index2 >= length4)
+              var length5 = str.length;
+              if (index2 < 0 || index2 >= length5)
                 return Nothing2;
               if (hasStringIterator) {
                 var iter = str[Symbol.iterator]();
@@ -30100,11 +30096,11 @@
             return $Tuple(bot, v2);
           }
           const v3 = unsnoc2(v2);
-          const v4 = unsnoc2(nonEmpty(v1));
+          const v4 = unsnoc2(nonEmptyListNonEmptyList.nonEmpty(v1));
           if (!eqList.eq($List("Cons", v4.last, listMap(anon)($1)))(v3.last._1)) {
             return popIfPresent(v4.init)(v2);
           }
-          const $22 = popIfPresent(v4.init)(nonEmpty(v3.init));
+          const $22 = popIfPresent(v4.init)(nonEmptyListNonEmptyList.nonEmpty(v3.init));
           return $Tuple(
             $0.join($22._1)((() => {
               if (v3.last._2.tag === "ListEmpty") {
@@ -30509,7 +30505,7 @@
             $List("Cons", $Either("Left", v1._1._1._1), Nil),
             $Expr2("ListComp", void 0, v1._2, v1._1._2)
           ))((() => {
-            const $22 = nonEmpty(clausesStateBwd(dictBoundedJoinSemilattice)($Cont("ContElim", v._1._2._2))((() => {
+            const $22 = nonEmptyListNonEmptyList.nonEmpty(clausesStateBwd(dictBoundedJoinSemilattice)($Cont("ContElim", v._1._2._2))((() => {
               const $23 = orElseFwd()($Tuple(
                 $List("Cons", $Either("Left", v1._1._1._1), Nil),
                 $Expr2("ListComp", void 0, v1._2, v1._1._2)
@@ -32540,38 +32536,38 @@
     }
   });
   var joinSemilatticeBaseVal = (dictJoinSemilattice) => {
-    const join = dictJoinSemilattice.join;
+    const join2 = dictJoinSemilattice.join;
     return {
       join: (v) => (v1) => {
         if (v.tag === "Int") {
           if (v1.tag === "Int") {
             return $BaseVal("Int", mustEq(eqInt)(showInt)(v._1)(v1._1));
           }
-          return applyBaseVal.apply(functorBaseVal.map(join)(v))(v1);
+          return applyBaseVal.apply(functorBaseVal.map(join2)(v))(v1);
         }
         if (v.tag === "Float") {
           if (v1.tag === "Float") {
             return $BaseVal("Float", mustEq(eqNumber)(showNumber)(v._1)(v1._1));
           }
-          return applyBaseVal.apply(functorBaseVal.map(join)(v))(v1);
+          return applyBaseVal.apply(functorBaseVal.map(join2)(v))(v1);
         }
         if (v.tag === "Str") {
           if (v1.tag === "Str") {
             return $BaseVal("Str", mustEq(eqString)(showString)(v._1)(v1._1));
           }
-          return applyBaseVal.apply(functorBaseVal.map(join)(v))(v1);
+          return applyBaseVal.apply(functorBaseVal.map(join2)(v))(v1);
         }
         if (v.tag === "Record") {
           if (v1.tag === "Record") {
             return $BaseVal("Record", unionWith(joinSemilatticeVal(dictJoinSemilattice).join)(v._1)(v1._1));
           }
-          return applyBaseVal.apply(functorBaseVal.map(join)(v))(v1);
+          return applyBaseVal.apply(functorBaseVal.map(join2)(v))(v1);
         }
         if (v.tag === "Dictionary") {
           if (v1.tag === "Dictionary") {
             return $BaseVal("Dictionary", joinSemilatticeDictRep(dictJoinSemilattice).join(v._1)(v1._1));
           }
-          return applyBaseVal.apply(functorBaseVal.map(join)(v))(v1);
+          return applyBaseVal.apply(functorBaseVal.map(join2)(v))(v1);
         }
         if (v.tag === "Constr") {
           if (v1.tag === "Constr") {
@@ -32581,18 +32577,18 @@
               joinSemilatticeList(joinSemilatticeVal(dictJoinSemilattice)).join(v._2)(v1._2)
             );
           }
-          return applyBaseVal.apply(functorBaseVal.map(join)(v))(v1);
+          return applyBaseVal.apply(functorBaseVal.map(join2)(v))(v1);
         }
         if (v.tag === "Matrix") {
           if (v1.tag === "Matrix") {
             return $BaseVal("Matrix", joinSemilatticeMatrixRep(dictJoinSemilattice).join(v._1)(v1._1));
           }
-          return applyBaseVal.apply(functorBaseVal.map(join)(v))(v1);
+          return applyBaseVal.apply(functorBaseVal.map(join2)(v))(v1);
         }
         if (v.tag === "Fun" && v1.tag === "Fun") {
           return $BaseVal("Fun", joinSemilatticeFun(dictJoinSemilattice).join(v._1)(v1._1));
         }
-        return applyBaseVal.apply(functorBaseVal.map(join)(v))(v1);
+        return applyBaseVal.apply(functorBaseVal.map(join2)(v))(v1);
       }
     };
   };
@@ -33542,6 +33538,127 @@
     }
   };
 
+  // output-es/Data.Semigroup.Foldable/index.js
+  var maximum = (dictOrd) => {
+    const semigroupMax = {
+      append: (v) => (v1) => {
+        const v$1 = dictOrd.compare(v)(v1);
+        if (v$1 === "LT") {
+          return v1;
+        }
+        if (v$1 === "EQ") {
+          return v;
+        }
+        if (v$1 === "GT") {
+          return v;
+        }
+        fail();
+      }
+    };
+    return (dictFoldable1) => dictFoldable1.foldMap1(semigroupMax)(unsafeCoerce);
+  };
+  var minimum = (dictOrd) => {
+    const semigroupMin = {
+      append: (v) => (v1) => {
+        const v$1 = dictOrd.compare(v)(v1);
+        if (v$1 === "LT") {
+          return v;
+        }
+        if (v$1 === "EQ") {
+          return v;
+        }
+        if (v$1 === "GT") {
+          return v1;
+        }
+        fail();
+      }
+    };
+    return (dictFoldable1) => dictFoldable1.foldMap1(semigroupMin)(unsafeCoerce);
+  };
+
+  // output-es/Data.Array.NonEmpty.Internal/foreign.js
+  var foldr1Impl = function(f, xs) {
+    var acc = xs[xs.length - 1];
+    for (var i = xs.length - 2; i >= 0; i--) {
+      acc = f(xs[i])(acc);
+    }
+    return acc;
+  };
+  var foldl1Impl = function(f, xs) {
+    var acc = xs[0];
+    var len = xs.length;
+    for (var i = 1; i < len; i++) {
+      acc = f(acc)(xs[i]);
+    }
+    return acc;
+  };
+  var traverse1Impl = function() {
+    function Cont(fn) {
+      this.fn = fn;
+    }
+    var emptyList = {};
+    var ConsCell = function(head, tail) {
+      this.head = head;
+      this.tail = tail;
+    };
+    function finalCell(head) {
+      return new ConsCell(head, emptyList);
+    }
+    function consList(x2) {
+      return function(xs) {
+        return new ConsCell(x2, xs);
+      };
+    }
+    function listToArray(list) {
+      var arr = [];
+      var xs = list;
+      while (xs !== emptyList) {
+        arr.push(xs.head);
+        xs = xs.tail;
+      }
+      return arr;
+    }
+    return function(apply4, map3, f) {
+      var buildFrom = function(x2, ys) {
+        return apply4(map3(consList)(f(x2)))(ys);
+      };
+      var go = function(acc, currentLen, xs) {
+        if (currentLen === 0) {
+          return acc;
+        } else {
+          var last3 = xs[currentLen - 1];
+          return new Cont(function() {
+            var built = go(buildFrom(last3, acc), currentLen - 1, xs);
+            return built;
+          });
+        }
+      };
+      return function(array2) {
+        var acc = map3(finalCell)(f(array2[array2.length - 1]));
+        var result = go(acc, array2.length - 1, array2);
+        while (result instanceof Cont) {
+          result = result.fn();
+        }
+        return map3(listToArray)(result);
+      };
+    };
+  }();
+
+  // output-es/Data.Array.NonEmpty.Internal/index.js
+  var foldable1NonEmptyArray = {
+    foldMap1: (dictSemigroup) => {
+      const append2 = dictSemigroup.append;
+      return (f) => {
+        const $0 = arrayMap(f);
+        const $1 = foldable1NonEmptyArray.foldl1(append2);
+        return (x2) => $1($0(x2));
+      };
+    },
+    foldr1: ($0) => ($1) => foldr1Impl($0, $1),
+    foldl1: ($0) => ($1) => foldl1Impl($0, $1),
+    Foldable0: () => foldableArray
+  };
+
   // output-es/App.View.LineChart/foreign.js
   selection_default.prototype.attrs = function(m) {
     for (const k in m) {
@@ -33549,9 +33666,31 @@
     }
     return this;
   };
-  function setSelState2({ point_attrs }, nameCol, rootElement, chart, listener) {
-    rootElement.selectAll(".point").each(function(point2) {
-      select_default2(this).attrs(point_attrs(nameCol)(chart)(point2)).on("mousedown", (e) => {
+  selection_default.prototype.attrFuns = function(m) {
+    for (const k in m) {
+      this.attr(k, (d) => m[k](d));
+    }
+    return this;
+  };
+  function createChild_(parent, elementType, attrs) {
+    return () => {
+      return parent.append(elementType).attrs(attrs);
+    };
+  }
+  function createChildren_(parent, elementType, data, attrFuns) {
+    return () => {
+      return parent.selectAll(elementType).data(data).enter().append(elementType).attrFuns(attrFuns);
+    };
+  }
+  function line_(to, points) {
+    return () => {
+      const line2 = line_default().x((d) => to.x(d.x)).y((d) => to.y(d.y));
+      return line2(points);
+    };
+  }
+  function setSelState2({ point_attrs }, {}, nameCol, rootElement, listener) {
+    rootElement.selectAll(".linechart-point").each(function(point2) {
+      select_default2(this).attrs(point_attrs(nameCol)(point2)).on("mousedown", (e) => {
         listener(e);
       }).on("mouseenter", (e) => {
         listener(e);
@@ -33560,7 +33699,7 @@
       });
     });
   }
-  function drawLineChart_(lineChartHelpers2, { val }, {
+  function drawLineChart_(lineChartHelpers2, uiHelpers2, {
     divId,
     suffix,
     view: {
@@ -33569,9 +33708,10 @@
     }
   }, listener) {
     return () => {
-      const { point_smallRadius, plot_max_y, plot_max_x, plot_min_x } = lineChartHelpers2;
+      const { createRootElement, interior, ticks: ticks2, to, legendHelpers, createLegend, createLegendEntry, caption_attrs } = lineChartHelpers2;
+      const { val } = uiHelpers2;
       const childId = divId + "-" + suffix;
-      const margin = { top: 15, right: 65, bottom: 40, left: 30 }, width = 230 - margin.left - margin.right, height = 185 - margin.top - margin.bottom, y_max = Math.max(...plots.map(plot_max_y)), x_min = Math.min(...plots.map(plot_min_x)), x_max = Math.max(...plots.map(plot_max_x)), names2 = plots.map((plot) => val(plot.name));
+      const names2 = plots.map((plot) => val(plot.name));
       const div = select_default2("#" + divId);
       if (div.empty()) {
         console.error("Unable to insert figure: no div found with id " + divId);
@@ -33583,38 +33723,38 @@
         return color2(names2.indexOf(name3));
       }
       if (rootElement.empty()) {
-        rootElement = div.append("svg").attr("width", width + margin.left + margin.right).attr("height", height + margin.top + margin.bottom).attr("id", childId).append("g").attr("transform", `translate(${margin.left}, ${margin.top})`);
-        const x2 = linear2().domain([x_min, x_max]).range([0, width]), y2 = linear2().domain([0, y_max]).range([height, 0]);
-        const line1 = line_default().x((d) => x2(val(d.x))).y((d) => y2(val(d.y)));
-        rootElement.selectAll("line").data([...plots.entries()]).enter().append("g").append("path").attr("fill", "none").attr("stroke", ([, plot]) => nameCol(val(plot.name))).attr("stroke-width", 1).attr("class", "line").attr("d", ([, plot]) => line1(plot.points));
-        for (const i_plot of plots.entries()) {
-          const [i, plot] = i_plot;
-          rootElement.selectAll("point").data([...plot.points.entries()].map(([j, p]) => {
+        rootElement = createRootElement(div)(childId)();
+        rootElement.selectAll("line").data(plots.entries()).enter().append("path").attr("fill", "none").attr("stroke", ([, plot]) => nameCol(val(plot.name))).attr("stroke-width", 1).attr("class", "line").attr("d", ([, plot]) => line(to)(plot.points.map(({ x: x2, y: y2 }) => {
+          return { x: val(x2), y: val(y2) };
+        }))());
+        for (const [i, plot] of plots.entries()) {
+          rootElement.selectAll("linechart-point").data(plot.points.entries().map(([j, p]) => {
             return { name: val(plot.name), x: val(p.x), y: val(p.y), i, j };
-          })).enter().append("g").append("circle").attr("class", "point").attr("cx", (point2) => x2(point2.x)).attr("cy", (point2) => y2(point2.y));
+          })).enter().append("circle").attr("class", "linechart-point");
         }
-        rootElement.append("g").attr("transform", `translate(0, ${height})`).call(axisBottom(x2).ticks(x_max - x_min).tickFormat(format("d")));
-        rootElement.append("g").call(axisLeft(y2).tickSizeOuter(0).ticks(3).tickFormat(format(".1f")));
-        const legendLineHeight = 15, legendStart = width + margin.left / 2;
-        rootElement.append("rect").attr("class", "legend-box").attr("transform", `translate(${legendStart}, ${legendLineHeight * (names2.length - 1) + 2})`).attr("x", 0).attr("y", 0).attr("height", legendLineHeight * names2.length).attr("width", margin.right - 16);
-        const legend = rootElement.selectAll("legend").data(names2).enter().append("g").attr(
-          "transform",
-          (d, i) => `translate(${legendStart}, ${height / 2 - margin.top + i * legendLineHeight})`
-        );
-        legend.append("text").text((d) => d).attr("font-size", 11).attr("transform", "translate(15, 9)");
-        legend.append("circle").attr("fill", (d) => nameCol(d)).attr("r", point_smallRadius).attr("cx", legendLineHeight / 2 - point_smallRadius / 2).attr("cy", legendLineHeight / 2 - point_smallRadius / 2);
-        rootElement.append("text").text(val(caption)).attr("x", width / 2).attr("y", height + 35).attr("class", "title-text").attr("dominant-baseline", "bottom").attr("text-anchor", "middle");
+        rootElement.append("g").attr("transform", `translate(0, ${interior.height})`).call(axisBottom(to.x).ticks(ticks2.x).tickFormat(format("d")));
+        rootElement.append("g").call(axisLeft(to.y).tickSizeOuter(0).ticks(ticks2.y).tickFormat(format(".1f")));
+        const legend = createLegend(rootElement)();
+        const legendEntry = createLegendEntry(legend)();
+        legendEntry.append("text").text(({ name: name3 }) => name3).attrs(legendHelpers.text_attrs);
+        legendEntry.append("circle").attr("fill", ({ name: name3 }) => nameCol(name3)).attrs(legendHelpers.circle_attrs);
+        rootElement.append("text").text(val(caption)).attrs(caption_attrs);
       }
-      setSelState2(lineChartHelpers2, nameCol, rootElement, { plots }, listener);
+      setSelState2(lineChartHelpers2, uiHelpers2, nameCol, rootElement, listener);
     };
   }
   var drawLineChart = (x1) => (x2) => (x3) => (x4) => drawLineChart_(x1, x2, x3, x4);
+  var scaleLinear = (x1) => (x2) => linear2().domain([x1.min, x1.max]).range([x2.min, x2.max]);
+  var createChild = (x1) => (x2) => (x3) => createChild_(x1, x2, x3);
+  var createChildren = (x1) => (x2) => (x3) => (x4) => createChildren_(x1, x2, x3, x4);
+  var line = (x1) => (x2) => line_(x1, x2);
 
   // output-es/App.View.LineChart/index.js
-  var identity23 = (x2) => x2;
+  var minimum2 = /* @__PURE__ */ minimum(ordNumber)(foldable1NonEmptyArray);
+  var maximum2 = /* @__PURE__ */ maximum(ordNumber)(foldable1NonEmptyArray);
+  var length4 = /* @__PURE__ */ foldlArray((c) => (v) => 1 + c | 0)(0);
   var fromFoldable10 = /* @__PURE__ */ fromFoldable(foldableArray);
-  var minimum = /* @__PURE__ */ (() => minimumBy(foldableArray)(ordNumber.compare))();
-  var maximum = /* @__PURE__ */ (() => maximumBy(foldableArray)(ordNumber.compare))();
+  var identity24 = (x2) => x2;
   var reflectDictValSelState\u{1D54A}Po = { from: () => (r) => ({ x: get_intOrNumber("x")(r), y: get_intOrNumber("y")(r) }) };
   var reflectDictValSelState\u{1D54A}Li = {
     from: () => (r) => ({
@@ -33642,59 +33782,98 @@
       plots: arrayMap(reflectValSelState\u{1D54A}LinePl.from())(reflectValSelState\u{1D54A}ArrayV.from()($$get(showString)(mapDictString)("plots")(r)))
     })
   };
-  var lineChartHelpers = {
-    plot_max_x: (v) => definitely("absurd")(maximum(arrayMap((v1) => v1.x._1)(v.points))),
-    plot_min_x: (v) => definitely("absurd")(minimum(arrayMap((v1) => v1.x._1)(v.points))),
-    plot_max_y: (v) => definitely("absurd")(maximum(arrayMap((v1) => v1.y._1)(v.points))),
-    point_smallRadius: 2,
-    point_attrs: (nameCol) => (v) => (v1) => {
-      const $0 = unsafeIndex(unsafeIndex(v.plots)(v1.i).points)(v1.j).y;
-      const fill = compare$p($0._2.persistent)(None) !== "EQ" ? (a) => colorShade(a)(-30) : identity23;
-      const col = nameCol(v1.name);
-      return fromFoldable10([
-        $Tuple(
-          "r",
-          showNumberImpl(toNumber(2) * (() => {
-            if (isPrimary($0._2)) {
-              return 2;
-            }
-            if (isSecondary($0._2)) {
-              return 1.4;
-            }
-            return 1;
-          })())
-        ),
-        $Tuple("stroke-width", "1"),
-        $Tuple("stroke", (compare$p($0._2.transient)(None) !== "EQ" ? (a) => colorShade(a)(-30) : identity23)(fill(col))),
-        $Tuple("fill", fill(col))
-      ]);
-    }
+  var translate = (v) => "translate(" + showIntImpl(v.x) + ", " + showIntImpl(v.y) + ")";
+  var lineChartHelpers = (v) => {
+    const $0 = v.plots;
+    const $1 = arrayBind(arrayMap((x2) => x2.points)($0))(identity5);
+    const ps = definitely("non-empty")($1.length > 0 ? $Maybe("Just", $1) : Nothing);
+    const $2 = arrayMap((x2) => x2.x._1)(ps);
+    const $3 = minimum2($2);
+    const $4 = maximum2($2);
+    const $5 = 15 * length4($0) | 0;
+    const legendHelpers = {
+      text_attrs: fromFoldable10([$Tuple("font-size", "11"), $Tuple("transform", translate({ x: 15, y: 9 }))]),
+      circle_attrs: fromFoldable10([$Tuple("r", "2"), $Tuple("cx", "6"), $Tuple("cy", "6")]),
+      entry_y: (i) => (i * 15 | 0) + 2 | 0
+    };
+    const interior = { width: 260, height: 230 };
+    const $6 = intDiv(interior.height - $5 | 0, 2);
+    const to = {
+      x: scaleLinear({ min: $3, max: $4 })({ min: 0, max: toNumber(interior.width) }),
+      y: scaleLinear({ min: 0, max: maximum2(arrayMap((x2) => x2.y._1)(ps)) })({ min: toNumber(interior.height), max: 0 })
+    };
+    return {
+      createRootElement: (div1) => (childId) => {
+        const $7 = createChild(div1)("svg")(fromFoldable10([$Tuple("width", "330"), $Tuple("height", "285"), $Tuple("id", childId)]));
+        return () => {
+          const rootElement = $7();
+          return createChild(rootElement)("g")(fromFoldable10([$Tuple("transform", translate({ x: 15, y: 15 }))]))();
+        };
+      },
+      point_attrs: (nameCol) => (v1) => {
+        const v3 = unsafeIndex(unsafeIndex($0)(v1.i).points)(v1.j);
+        const fill = compare$p(v3.y._2.persistent)(None) !== "EQ" ? (a) => colorShade(a)(-30) : identity24;
+        const col = nameCol(v1.name);
+        return fromFoldable10([
+          $Tuple(
+            "r",
+            showNumberImpl(toNumber(2) * (() => {
+              if (isPrimary(v3.y._2)) {
+                return 2;
+              }
+              if (isSecondary(v3.y._2)) {
+                return 1.4;
+              }
+              return 1;
+            })())
+          ),
+          $Tuple("stroke-width", "1"),
+          $Tuple("stroke", (compare$p(v3.y._2.transient)(None) !== "EQ" ? (a) => colorShade(a)(-30) : identity24)(fill(col))),
+          $Tuple("fill", fill(col)),
+          $Tuple("cx", showNumberImpl(to.x(v3.x._1))),
+          $Tuple("cy", showNumberImpl(to.y(v3.y._1)))
+        ]);
+      },
+      interior,
+      ticks: { x: $4 - $3, y: 3 },
+      to,
+      legendHelpers,
+      createLegend: (parent) => {
+        const $7 = createChild(parent)("g")(fromFoldable10([$Tuple("transform", translate({ x: 275, y: $6 }))]));
+        return () => {
+          const legend$p = $7();
+          createChild(legend$p)("rect")(fromFoldable10([
+            $Tuple("class", "legend-box"),
+            $Tuple("x", "0"),
+            $Tuple("y", "0"),
+            $Tuple("height", showIntImpl($5)),
+            $Tuple("width", "40")
+          ]))();
+          return legend$p;
+        };
+      },
+      createLegendEntry: (parent) => createChildren(parent)("g")(mapWithIndexArray((i) => (v1) => ({ i, name: v1.name._1 }))($0))(fromFoldable10([
+        $Tuple("transform", (v1) => translate({ x: 0, y: legendHelpers.entry_y(v1.i) }))
+      ])),
+      caption_attrs: fromFoldable10([
+        $Tuple("x", "130"),
+        $Tuple("y", "265"),
+        $Tuple("class", "title-text"),
+        $Tuple("dominant-baseline", "bottom"),
+        $Tuple("text-anchor", "middle")
+      ])
+    };
   };
   var drawableLineChart = {
-    draw: (rSpec) => (figVal) => (v) => (redraw) => {
-      const $0 = drawLineChart(lineChartHelpers)(uiHelpers)(rSpec);
-      const $1 = selListener(figVal)(redraw)((v1) => (x2) => constrArg("LineChart")(0)(field("plots")(listElement(v1.i)(linePoint(v1.j)(x2)))));
+    draw: (v) => (figVal) => (v1) => (redraw) => {
+      const $0 = drawLineChart(lineChartHelpers(v.view))(uiHelpers)(v);
+      const $1 = selListener(figVal)(redraw)((v2) => (x2) => constrArg("LineChart")(0)(field("plots")(listElement(v2.i)(linePoint(v2.j)(x2)))));
       return () => {
         const $2 = $1();
         return $0($2)();
       };
     }
   };
-
-  // output-es/Data.Number.Format/foreign.js
-  function wrap(method) {
-    return function(d) {
-      return function(num) {
-        return method.apply(num, [d]);
-      };
-    };
-  }
-  var toPrecisionNative = wrap(Number.prototype.toPrecision);
-  var toFixedNative = wrap(Number.prototype.toFixed);
-  var toExponentialNative = wrap(Number.prototype.toExponential);
-  function toString(num) {
-    return num.toString();
-  }
 
   // output-es/App.View.LinkedText/foreign.js
   selection_default.prototype.attrs = function(m) {
@@ -33707,15 +33886,17 @@
     selState: selState2,
     selClasses: selClasses2,
     selClassesFor: selClassesFor2,
-    join
+    join: join2
   }, div, view2, selListener2) {
-    const sel = selState2(view2);
-    div.classed(selClasses2, false).classed(selClassesFor2(sel), true).on("mousedown", (e) => {
-      selListener2(e);
-    }).on("mouseenter", (e) => {
-      selListener2(e);
-    }).on("mouseleave", (e) => {
-      selListener2(e);
+    div.selectAll("span").each(function(textElem) {
+      const sel = selState2(view2[textElem.i]);
+      select_default2(this).classed(selClasses2, false).classed(selClassesFor2(sel), true).on("mousedown", (e) => {
+        selListener2(e);
+      }).on("mouseenter", (e) => {
+        selListener2(e);
+      }).on("mouseleave", (e) => {
+        selListener2(e);
+      });
     });
   }
   function drawLinkedText_(linkedTextHelpers2, uiHelpers2, {
@@ -33725,29 +33906,28 @@
   }, selListener2) {
     return () => {
       const div = select_default2("#" + divId);
-      let rootElement = div.selectAll("#" + divId);
-      div.text(view2._1);
-      div.attr("class", "linked-text");
-      setSelState3(linkedTextHelpers2, uiHelpers2, div, view2, selListener2);
+      const childId = divId + "-" + suffix;
+      let rootElement = div.selectAll("#" + childId);
+      if (rootElement.empty()) {
+        rootElement = div.append("div").attr("id", childId).text(view2._1).attr("class", "linked-text-parent");
+        rootElement.selectAll("span").data(view2.entries().map(([i, conts]) => {
+          return { i, conts };
+        })).enter().append("span").attr("id", childId).text((d) => d.conts._1).attr("class", "linked-text");
+      }
+      setSelState3(linkedTextHelpers2, uiHelpers2, rootElement, view2, selListener2);
     };
   }
   var drawLinkedText = (x1) => (x2) => (x3) => (x4) => drawLinkedText_(x1, x2, x3, x4);
 
   // output-es/App.View.LinkedText/index.js
-  var stringify = (v) => {
-    if (v.tag === "Left") {
-      return toString(toNumber(v._1));
-    }
-    if (v.tag === "Right") {
-      return toString(v._1);
-    }
-    fail();
+  var reflectValSelState\u{1D54A}Linked = {
+    from: () => (r) => arrayMap((v) => $Tuple(v._2.tag === "Str" ? v._2._1 : typeError(v._2)("Str"), v._1))(reflectValSelState\u{1D54A}ArrayV.from()(r))
   };
-  var linkedTextHelpers = { test_field: "test" };
+  var linkedTextHelpers = {};
   var drawableLinkedText = {
     draw: (rSpec) => (figVal) => (v) => (redraw) => {
       const $0 = drawLinkedText(linkedTextHelpers)(uiHelpers)(rSpec);
-      const $1 = selListener(figVal)(redraw)((v1) => constrArg("LinkedText")(0));
+      const $1 = selListener(figVal)(redraw)((v1) => (x2) => constrArg("LinkedText")(0)(listElement(v1.i)(x2)));
       return () => {
         const $2 = $1();
         return $0($2)();
@@ -33917,11 +34097,11 @@
     selState: selState2,
     selClasses: selClasses2,
     selClassesFor: selClassesFor2,
-    join
+    join: join2
   }, rootElement, chart, listener) {
     const { points } = chart;
     rootElement.selectAll(".scatterplot-point").each(function(point2) {
-      const sel = join(selState2(points[point2.i].x))(selState2(points[point2.i].y));
+      const sel = join2(selState2(points[point2.i].x))(selState2(points[point2.i].y));
       select_default2(this).classed(selClasses2, false).classed(selClassesFor2(sel), true).attrs(point_attrs(chart)(point2)).on("mousedown", (e) => {
         listener(e);
       }).on("mouseenter", (e) => {
@@ -33968,7 +34148,7 @@
         rootElement.append("text").attr("transform", "rotate(-90)").attr("x", -margin.top).attr("y", -margin.left + 20).style("text-anchor", "end").style("font-size", "8px").text(val(ylabel));
         rootElement.append("g").selectAll("circle").data([...points.entries()].map(([i, point2]) => {
           return { i, point: point2 };
-        })).enter().append("circle").classed("scatterplot-point", true).attr("cx", ({ point: point2 }) => x2(val(point2.x))).attr("cy", ({ point: point2 }) => y2(val(point2.y))).attr("data-y", ({ point: point2 }) => val(point2.y)).attr("stroke-width", 0.5);
+        })).enter().append("circle").classed("scatterplot-point", true).attr("cx", ({ point: point2 }) => x2(val(point2.x))).attr("cy", ({ point: point2 }) => y2(val(point2.y))).attr("stroke-width", 0.5);
         rootElement.append("text").text(val(caption)).attr("x", width / 2).attr("y", height + 40).attr("class", "title-text").attr("dominant-baseline", "bottom").attr("text-anchor", "middle");
       }
       setSelState5(ScatterPlotHelpers, uiHelpers2, rootElement, { points }, listener);
@@ -33977,6 +34157,7 @@
   var drawScatterPlot = (x1) => (x2) => (x3) => (x4) => drawScatterPlot_(x1, x2, x3, x4);
 
   // output-es/App.View.ScatterPlot/index.js
+  var join = (s1) => (s2) => ({ persistent: joinSemilattice\u{1D54A}.join(s1.persistent)(s2.persistent), transient: joinSemilattice\u{1D54A}.join(s1.transient)(s2.transient) });
   var fromFoldable11 = /* @__PURE__ */ fromFoldable(foldableArray);
   var reflectDictValSelState\u{1D54A}Sc = {
     from: () => (r) => ({
@@ -33997,15 +34178,16 @@
   };
   var scatterPlotHelpers = {
     point_attrs: (v) => (v1) => {
-      const $0 = unsafeIndex(v.points)(v1.i).y;
+      const v2 = unsafeIndex(v.points)(v1.i);
+      const sel = join(v2.x._2)(v2.y._2);
       return fromFoldable11([
         $Tuple(
           "r",
           showNumberImpl(toNumber(2) * (() => {
-            if (isPrimary($0._2)) {
+            if (isPrimary(sel)) {
               return 1.6;
             }
-            if (isSecondary($0._2)) {
+            if (isSecondary(sel)) {
               return 1.25;
             }
             return 1;
@@ -34097,7 +34279,7 @@
   var drawTable = (x1) => (x2) => (x3) => (x4) => (x5) => drawTable_(x1, x2, x3, x4, x5);
 
   // output-es/App.View.TableView/index.js
-  var identity24 = (x2) => x2;
+  var identity25 = (x2) => x2;
   var tableViewHelpers = {
     rowKey: "__n",
     record_isUsed: (r) => !isEmpty(filterWithKey((x2) => {
@@ -34116,7 +34298,7 @@
   };
   var drawableTableView = {
     draw: (rSpec) => (figVal) => (v) => (redraw) => {
-      const $0 = eventListener((x2) => redraw(identity24));
+      const $0 = eventListener((x2) => redraw(identity25));
       return () => {
         const toggleListener = $0();
         const $1 = selListener(figVal)(redraw)((v1) => {
@@ -34135,7 +34317,7 @@
   var pack3 = (x2) => (k) => k(drawableLinkedText)(x2);
   var pack4 = (x2) => (k) => k(drawableMultiView)(x2);
   var pack5 = (x2) => (k) => k(drawableTableView)(x2);
-  var identity25 = (x2) => x2;
+  var identity26 = (x2) => x2;
   var pack6 = (x2) => (k) => k(drawableMatrixView)(x2);
   var view = () => (v) => (v1) => (v2) => {
     if (v1._2.tag === "Constr") {
@@ -34150,7 +34332,7 @@
           return pack2(record(reflectDictValSelState\u{1D54A}Sc.from())(v1._2._2._1));
         }
         if (v1._2._1 === "LinkedText") {
-          return pack3($Tuple(stringify(intOrNumber.unpack(v1._2._2._1._2)), v1._2._2._1._1));
+          return pack3(reflectValSelState\u{1D54A}Linked.from()(v1._2._2._1));
         }
         if (v1._2._1 === "MultiView") {
           const vws = _fmapObject(
@@ -34166,7 +34348,7 @@
         }
       }
       if (v1._2._1 === "Nil" || v1._2._1 === ":") {
-        return pack5({ title: v, filter: true, table: arrayMap(record(identity25))(reflectValSelState\u{1D54A}ArrayV.from()(v1)) });
+        return pack5({ title: v, filter: true, table: arrayMap(record(identity26))(reflectValSelState\u{1D54A}ArrayV.from()(v1)) });
       }
       fail();
     }
@@ -34974,16 +35156,16 @@
   };
 
   // output-es/GaloisConnection/index.js
-  var identity26 = (x2) => x2;
+  var identity27 = (x2) => x2;
   var semigroupoidGaloisConnect = { compose: (v) => (v1) => ({ fwd: (x2) => v.fwd(v1.fwd(x2)), bwd: (x2) => v1.bwd(v.bwd(x2)) }) };
-  var categoryGaloisConnection = { identity: { fwd: identity26, bwd: identity26 }, Semigroupoid0: () => semigroupoidGaloisConnect };
+  var categoryGaloisConnection = { identity: { fwd: identity27, bwd: identity27 }, Semigroupoid0: () => semigroupoidGaloisConnect };
 
   // output-es/Affjax.RequestHeader/index.js
   var $RequestHeader = (tag, _1, _2) => ({ tag, _1, _2 });
 
   // output-es/Affjax.ResponseFormat/index.js
   var $ResponseFormat = (tag, _1) => ({ tag, _1 });
-  var identity27 = (x2) => x2;
+  var identity28 = (x2) => x2;
 
   // output-es/Affjax.ResponseHeader/index.js
   var $ResponseHeader = (_1, _2) => ({ tag: "ResponseHeader", _1, _2 });
@@ -34993,7 +35175,7 @@
   function id2(x2) {
     return x2;
   }
-  function stringify2(j) {
+  function stringify(j) {
     return JSON.stringify(j);
   }
 
@@ -35513,7 +35695,7 @@
         return _pure($Either("Left", $$$Error("RequestContentError", "Body contains values that cannot be encoded as application/x-www-form-urlencoded")));
       }
       if (req2.content._1.tag === "Json") {
-        return send(notNull(stringify2(req2.content._1._1)));
+        return send(notNull(stringify(req2.content._1._1)));
       }
     }
     fail();
@@ -35544,7 +35726,7 @@
     username: Nothing,
     password: Nothing,
     withCredentials: false,
-    responseFormat: /* @__PURE__ */ $ResponseFormat("Ignore", identity27),
+    responseFormat: /* @__PURE__ */ $ResponseFormat("Ignore", identity28),
     timeout: Nothing
   };
 
@@ -35719,7 +35901,7 @@
   var toUpperSimple = /* @__PURE__ */ convert(uTowupper);
 
   // output-es/Parsing.Token/index.js
-  var identity28 = (x2) => x2;
+  var identity29 = (x2) => x2;
   var choice3 = /* @__PURE__ */ choice(foldableArray);
   var toUnfoldable8 = /* @__PURE__ */ toUnfoldable2(unfoldableArray);
   var theReservedNames = (v) => {
@@ -36032,10 +36214,10 @@
                   if ($132) {
                     return $42(v4$1, $122);
                   }
-                  return $52(v2, identity28);
+                  return $52(v2, identity29);
                 });
               },
-              (state2, a) => $22((v2$1) => $52(state2, identity28))
+              (state2, a) => $22((v2$1) => $52(state2, identity29))
             )));
           });
         },
@@ -37432,7 +37614,7 @@
   // output-es/Util.Parse/index.js
   var some3 = (p) => {
     const $0 = some2(alternativeParserT)(lazyParserT)(p);
-    return (state1, more, lift1, $$throw2, done) => more((v1) => $0(state1, more, lift1, $$throw2, (state2, a) => more((v2) => done(state2, nonEmpty(a)))));
+    return (state1, more, lift1, $$throw2, done) => more((v1) => $0(state1, more, lift1, $$throw2, (state2, a) => more((v2) => done(state2, nonEmptyListNonEmptyList.nonEmpty(a)))));
   };
   var sepBy1_try = (p) => (sep) => {
     const $0 = many2(alternativeParserT)(lazyParserT)((v1, $02, $1, $2, $3) => {
@@ -37484,7 +37666,7 @@
   };
   var choose2 = /* @__PURE__ */ choose(altParserT);
   var fanin3 = /* @__PURE__ */ fanin(categoryFn)(choiceFn);
-  var identity29 = (x2) => x2;
+  var identity30 = (x2) => x2;
   var operators = (binaryOp) => fromFoldableImpl(
     foldableList.foldr,
     listMap(arrayMap((v) => $Operator(
@@ -38430,10 +38612,10 @@
                                                         if ($37) {
                                                           return $32($ParseState(v4$1._1, v4$1._2, false), $36);
                                                         }
-                                                        return $33($ParseState($30, $31, false), identity29);
+                                                        return $33($ParseState($30, $31, false), identity30);
                                                       });
                                                     },
-                                                    (state2, a) => $26((v2$1) => $33(state2, identity29))
+                                                    (state2, a) => $26((v2$1) => $33(state2, identity30))
                                                   )));
                                                 });
                                               },
@@ -38487,10 +38669,10 @@
                                                       if ($37) {
                                                         return $32($ParseState(v4$1._1, v4$1._2, false), $36);
                                                       }
-                                                      return $33($ParseState($30, $31, false), identity29);
+                                                      return $33($ParseState($30, $31, false), identity30);
                                                     });
                                                   },
-                                                  (state2, a) => $26((v2$1) => $33(state2, identity29))
+                                                  (state2, a) => $26((v2$1) => $33(state2, identity30))
                                                 )));
                                               });
                                             },
@@ -39839,7 +40021,7 @@
         const $7 = v._2._1._1;
         const $8 = v1._2._1;
         const $9 = v1._2._2;
-        const $10 = nonEmpty(bindList.bind(applyList.apply(listMap(Tuple)(range3(1)($4)))(range3(1)($5)))(applicativeList.pure));
+        const $10 = nonEmptyListNonEmptyList.nonEmpty(bindList.bind(applyList.apply(listMap(Tuple)(range3(1)($4)))(range3(1)($5)))(applicativeList.pure));
         const v3 = foldl1((v42) => {
           const $11 = v42._2._1;
           const $12 = v42._2._2._1;
@@ -40884,7 +41066,7 @@
   ]);
 
   // output-es/ProgCxt/index.js
-  var identity30 = (x2) => x2;
+  var identity31 = (x2) => x2;
   var functorProgCxt = {
     map: (f) => (m) => ({
       ...m,
@@ -40959,7 +41141,7 @@
       const traverse9 = traversableEnv.traverse(dictApplicative);
       return (f) => (m) => Apply0.apply(Apply0.apply(Apply0.Functor0().map((v1) => (v2) => (v3) => ({ ...m, datasets: v1, mods: v2, primitives: v3 }))(traverse5(traversableTuple.traverse(dictApplicative)(traverse7(f)))(m.datasets)))(traverse5(traverse8(f))(m.mods)))(traverse9(f)(m.primitives));
     },
-    sequence: (dictApplicative) => (v) => traversableProgCxt.traverse(dictApplicative)(identity30)(v),
+    sequence: (dictApplicative) => (v) => traversableProgCxt.traverse(dictApplicative)(identity31)(v),
     Functor0: () => functorProgCxt,
     Foldable1: () => foldableProgCxt
   };
@@ -40996,7 +41178,7 @@
       ...defaultRequest,
       url: "/" + v + "/" + v1 + ".fld",
       method: $Either("Left", GET),
-      responseFormat: $ResponseFormat("String", identity27)
+      responseFormat: $ResponseFormat("String", identity28)
     })))((result) => {
       if (result.tag === "Left") {
         const $0 = result._1;
