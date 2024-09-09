@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "description": "An example of a Fluid publication using an IPCC report",
   "scripts": {
-      "clean": "rm -rf dist && mkdir -p dist && cp -r fluid dist && cp -r fluid-submodule/fluid/lib dist/fluid && cp index.html dist && cp -r css dist",
+      "clean": "rm -rf dist && mkdir -p dist && cp -r fluid dist && cp -r fluid-submodule/fluid/lib dist/fluid && cp index.html dist && cp -r css dist && cp favicon.ico dist",
       "build": "yarn clean && yarn install && spago build --purs-args '--strict --censor-codes=UserDefinedWarning' && purs-backend-es bundle-app --main Article --to dist/article.js",
-      "serve": "npx http-serve dist -a 127.0.0.1 -c-1"
+      "serve": "npx http-serve dist -a 127.0.0.1 -c-1",
+      "test": "yarn puppeteer browsers install chrome && yarn puppeteer browsers install firefox && node puppeteer.js"
   },
   "repository": {
     "type": "git",
@@ -18,19 +19,23 @@
   },
   "homepage": "https://github.com/explorable-viz/fluid-example-ipcc-ar6-01#readme",
   "dependencies": {
-    "purescript": "^0.15.10",
     "@codemirror/commands": "6.6.0",
     "@codemirror/state": "6.4.1",
     "@codemirror/view": "6.32.0",
     "benchmark": "^2.1.4",
     "d3": "^7.9.0",
-    "node-process": "^1.0.1"
-  },
+    "express": "^4.19.2",
+    "express-static": "^1.2.6",
+    "http-shutdown": "^1.2.2",
+    "node-process": "^1.0.1",
+    "purescript": "^0.15.10"
+},
   "devDependencies": {
     "esbuild": "^0.15.1",
     "purescript-language-server": "0.16.6",
     "purescript-psa": "0.8.2",
     "purs-backend-es": "^1.1.0",
+    "puppeteer": "^23.2.1",
     "spago": "^0.20.9"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"

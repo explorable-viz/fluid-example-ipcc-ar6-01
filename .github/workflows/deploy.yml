@@ -18,6 +18,7 @@ jobs:
       - name: build
         run: |
           yarn build
+          yarn test
       - name: gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
