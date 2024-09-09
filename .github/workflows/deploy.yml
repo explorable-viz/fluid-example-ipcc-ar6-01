@@ -2,11 +2,11 @@ name: deploy
 run-name: Publish a Fluid publication
 
 on:
-  push
-  pull_request
-  workflow_dispatch
+  push:
+  pull_request:
+  workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * *"
 
 jobs:
   deploy-gh-pages:
