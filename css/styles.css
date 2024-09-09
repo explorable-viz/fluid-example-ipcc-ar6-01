@@ -63,8 +63,7 @@ h4 {
 }
 
 a {
-   text-decoration: none;
-   color: inherit;
+   border-bottom: lightblue 0.1em solid;
    transition-timing-function: ease-out
 }
 
